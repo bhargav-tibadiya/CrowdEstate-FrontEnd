@@ -1,0 +1,21 @@
+$black : #222222;
+$white : #ffffff;
+$color1 : #0f0f0f;
+
+@mixin flex ($direction, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin resetSpacing (){
+  margin: 0;
+  padding: 0;
+}
+
+
+@mixin occupyFullSpace(){
+  width: 100%;
+  height: 100%;
+}

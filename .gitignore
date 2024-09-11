@@ -1,0 +1,50 @@
+# Node.js related files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment variables
+.env
+
+# Production files
+/build
+/dist
+
+# Frontend specific files
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env
+
+# Backend specific files
+/backend/node_modules/
+/backend/.env
+
+# IDE specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# MacOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+docker-compose.dev.yml
+
+# Testing files
+/coverage
+/junit.xml
+/nyc_output
