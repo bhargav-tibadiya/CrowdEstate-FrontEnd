@@ -1,0 +1,54 @@
+@import '../../style/_constant.scss';
+
+.navbar {
+  height: 64%;
+  @include flex(row, center, space-between);
+  color: $white;
+  background-color: $color1;
+  padding: 17.5px 120px;
+
+  .website_logo {
+    .circle_logo {
+      width: 32px;
+      height: 32px;
+      background-color: $white;
+      color: $black;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  .website_section {
+    width: 100%;
+    margin: 0px 32px;
+
+    ul {
+      @include flex(row, center, center);
+
+      li {
+        list-style: none;
+        padding: 4px 12px;
+
+        a {
+          text-decoration: none;
+          color: $white;
+          font-size: 16px;
+        }
+      }
+
+    }
+
+  }
+
+  .website_other_icon {
+    @include flex(row, center, flex-end);
+    width: 160px;
+
+    button {
+      width: 78px;
+      padding: 8px 12px;
+      font-size: 16px;
+      // font-weight: 400;
+    }
+  }
+}
