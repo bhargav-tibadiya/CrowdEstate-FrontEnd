@@ -1,0 +1,12 @@
+@import '../../style/_constant.scss';
+
+.home_container {
+  @include occupyFullSpace();
+  @include flex(column, center, center);
+
+  background-color: $black;
+  color: $white;
+
+  font-size: 48px;
+  font-weight: 700;
+}
