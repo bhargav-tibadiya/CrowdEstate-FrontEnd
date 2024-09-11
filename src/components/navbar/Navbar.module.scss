@@ -1,0 +1,80 @@
+@import '../../style/_constant.scss';
+$color2:#AFB2BF;
+
+.navbar{
+    @include flex(row,center,space-between);
+    color: $white;
+    background-color: $color1;
+    padding: 17.5px 120px;
+
+    .website_logo{
+        @include flex(row,center,center);
+        .circle_logo{
+            @include flex(row,center,center);
+            width: 32px;
+            height: 32px;
+            background-color: $white;
+            color: $black;
+            font-size: 25px;
+            font-weight: bolder;
+            border-radius: 50%;
+            margin-right: 6.4px;
+            // padding: 2px;
+        }
+        span{
+            font-size: 20.5px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+    }
+    .website_section{
+        width: 100%;
+        margin: 0px 32px;
+        ul{
+            @include flex(row,center,center);
+
+            li{
+                @include flex(row,center,center);
+                list-style: none;
+                padding: 4px 12px;
+                a{
+                    text-decoration: none;
+                    color: $white;
+                    font-size: 16px;
+                }
+                
+            }
+        
+        }
+        .active{
+            color: #A9DD24;
+            font-weight: 700;
+        }
+
+    }
+    .website_other_icon{
+        width: 160px;
+        color: $color2;
+        @include flex(row,center,flex-end);
+        .search_icon{
+            @include flex(row,center,center);
+            width: 20px;
+            height: 20px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        button{
+            width: 78px;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 500;
+            border: 1px solid $color2;
+            outline: 0;
+            background: none;
+            color: $color2;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
+}
