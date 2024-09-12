@@ -1,9 +1,10 @@
-import {  NavLink } from "react-router-dom"
+import {  NavLink, useNavigate } from "react-router-dom"
 import { FaSearch ,FaAngleDown} from "react-icons/fa";
 import styles from "./Navbar.module.scss"
 import { routes } from "../../config/routes";
 
-const navbar = () => {
+const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <nav className={styles.navbar}>
       <div className={styles.website_logo}>
@@ -17,15 +18,15 @@ const navbar = () => {
             <li><NavLink to={routes.app}>App</NavLink><FaAngleDown/></li>
             <li><NavLink to={routes.about}>About us</NavLink></li>
             <li><NavLink to={routes.contact}>Contact us</NavLink></li>
-          </ul>
+          </ul> 
       
       </div>
       <div className={styles.website_other_icon}>
         <div className={styles.search_icon}><FaSearch/></div>
-        <button>Sign up</button>
+        <button onClick={()=>navigate(routes.login)}>Sign up</button>
       </div>
     </nav>
   )
 }
 
-export default navbar
+export default Navbar

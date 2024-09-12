@@ -1,0 +1,21 @@
+.login_container{
+    border: 1px solid black;
+    margin: 107px 120px;
+    height: 100vh;
+    display: flex;
+
+    .login_input_form{
+        border: 1px solid black;
+        width: 508px;
+        padding: 32px;
+
+        h1{
+            font-size: 30px;
+        }
+    }
+    .login_image{
+        margin-left: 120px;
+        border: 1px solid black;
+        width: 558px;
+    }
+}
