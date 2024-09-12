@@ -1,32 +1,38 @@
-import { NavLink } from "react-router-dom"
-import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"
+import { FaSearch, FaAngleDown } from "react-icons/fa";
+import styles from "./Navbar.module.scss"
 import { routes } from "../../config/routes";
-// import routes from "../../config/routes"
+import { useState } from "react";
 
-import styles from './Navbar.module.scss';
-const navbar = () => {
+const Navbar = () => {
+
+  const [selectedMenu, SetSelectedMenu] = useState(0)
+
+  console.log('selectedMenu', selectedMenu)
+
+  const navigate = useNavigate();
+
   return (
     <div className={styles.navbar}>
+
       <div className={styles.website_logo}>
         <span className={styles.circle_logo}>C</span>
         <span>CrowdEstate</span>
       </div>
+
       <div className={styles.website_section}>
-        <nav>
-          <ul>
-            <li><NavLink to={routes.home}>Home</NavLink></li>
-            <li><NavLink to={routes.app}>APP</NavLink></li>
-            <li><NavLink to={routes.about}>About us</NavLink></li>
-            <li><NavLink to={routes.contact}>Contact us</NavLink></li>
-          </ul>
-        </nav>
+        <div className={`${styles.nav_items} ${selectedMenu == 0 ? styles.active : ""}`} onClick={() => { navigate(routes.home), SetSelectedMenu(0) }}>Home</div>
+        <div className={`${styles.nav_items} ${selectedMenu == 1 ? styles.active : ""}`} onClick={() => { navigate(routes.app), SetSelectedMenu(1) }}> <span>App </span><FaAngleDown /></div>
+        <div className={`${styles.nav_items} ${selectedMenu == 2 ? styles.active : ""}`} onClick={() => { navigate(routes.about), SetSelectedMenu(2) }}>About us</div>
+        <div className={`${styles.nav_items} ${selectedMenu == 3 ? styles.active : ""}`} onClick={() => { navigate(routes.contact), SetSelectedMenu(3) }}>Contact us</div>
       </div>
+
       <div className={styles.website_other_icon}>
         <div className={styles.search_icon}><FaSearch /></div>
-        <button>Sign up</button>
+        <button onClick={() => navigate(routes.login)}>Sign up</button>
       </div>
     </div>
   )
 }
 
-export default navbar
+export default Navbar;
