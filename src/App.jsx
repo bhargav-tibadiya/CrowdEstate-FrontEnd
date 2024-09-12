@@ -3,12 +3,12 @@ import './App.scss'
 import Wrapper from './layout/wrapper/wrapper'
 import { routes } from './config/routes'
 import Home from './pages/home/Home'
+import Navbar from "./components/navbar/Navbar"
 
 function App() {
-
-
   return (
     <div className='app_container'>
+      <Navbar/>
       <Routes>
         <Route element={<Wrapper />}>
           <Route path={routes.default} element={<Home />} />
