@@ -1,108 +1,139 @@
 @import "../../components/navbar/Navbar.module.scss";
 @import "../../style/constant";
+
 .login_container {
-    margin: 107px 120px;
-    display: flex;
+  @include flex(row, flex-start, center);
+  gap: 250px;
 
-    .login_input_form {
-        width: 508px;
-        padding: 32px;
+  background-color: $primary;
+  padding: 100px 120px;
 
-        .head_details {
-            margin-bottom: 36px;
-            h1 {
-                font-weight: bold;
-                font-size: 30px;
-                line-height: 38px;
-                margin-bottom: 12px;
-            }
-            p {
-                font-size: 18px;
-                line-height: 26px;
-                margin-bottom: 24px;
-            }
-        }
 
-        .form_container {
-            margin-bottom: 36px;
-            .input_fields {
-                margin-bottom: 20px;
-                position: relative;
-                width: 100%;
-                label {
-                    font-size: 14px;
-                    font-weight: 300;
-                    margin-bottom: 6px;
-                    line-height: 22px;
-                }
-                input {
-                    width: calc(100% - 24px);
-                    padding: 12px;
-                    font-size: 16px;
-                    font-weight: 500;
-                    border: 0;
-                    outline: 0;
-                    background: rgba(128, 128, 128, 0.266);
-                    border-radius: 8px;
-                    box-shadow: 0px 1px 0px grey;
-                    margin-bottom: 6px;
-                }
-                span {
-                    position: absolute;
-                    right: 12px;
-                    transform: translateY(58%);
-                    cursor: pointer;
-                }
-                .forgot_password {
-                    font-size: 12px;
-                    line-height: 20px;
-                    text-align: right;
-                }
-            }
-        }
-        .button_login {
-            button {
-                @include flex(row,center,center);
-                width: 100%;
-                padding: 12px;
-                margin-bottom: 36px;
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 24px;
-                border: 0;
-                outline: 0;
-                background: rgba(128, 128, 128, 0.266);
-                border-radius: 8px;
-                box-shadow: 0.5px 1.5px 0px grey;
-                cursor: pointer;
+  .login_input_form {
+    padding: 32px;
 
-                img {
-                    width: 18px;
-                
-                }
-                span{
-                    margin-left: 10px;
-                }
-            }
-        }
+    .head_details {
+      margin-bottom: 60px;
+
+      h1 {
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 12px;
+        color: $white;
+      }
+
+      p {
+        font-family: "Edu SA Beginner";
+        font-size: 18px;
+        line-height: 26px;
+        color: $grey2;
+      }
     }
-    .login_image {
-        margin-left: 120px;
-        // border: 1px solid black;
-        width: 558px;
+
+    .form_container {
+      margin-bottom: 36px;
+
+      .input_fields {
+        @include flex(column, flex-start, flex-start);
+        gap: 6px;
+
+        margin-bottom: 20px;
         position: relative;
+        width: 100%;
 
-        img{
-            width: 100%;
-            height: 504px;
+        label {
+          color: $grey2;
+          font-size: 14px;
+          font-weight: 300;
+          padding-bottom: 6px;
+          line-height: 22px;
         }
-        .before_image {
-            margin: 27px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            filter: blur(7px);
+
+        input {
+          width: 420px;
+          padding: 12px;
+          font-size: 16px;
+          font-weight: 500;
+          border: 0;
+          outline: 0;
+          background: $secondary;
+          border-radius: 8px;
+          box-shadow: 0px 1px 0px $grey2;
+          margin-bottom: 6px;
+          color: $grey2;
         }
+
+        span {
+          position: absolute;
+          right: 12px;
+          transform: translateY(58%);
+          cursor: pointer;
+        }
+
+        .forgot_password {
+          width: 100%;
+          color: $blue;
+          font-size: 12px;
+          line-height: 20px;
+          text-align: right;
+        }
+      }
     }
+
+    .button_login {
+
+      button {
+        @include flex(row, center, center);
+        gap: 10px;
+        width: 100%;
+        padding: 12px;
+        // margin-bottom: 36px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        border: 0;
+        outline: 0;
+        background: $active;
+        border-radius: 8px;
+        cursor: pointer;
+
+        img {
+          width: 18px;
+        }
+      }
+
+      .google_login_btn {
+        .google_img {
+          @include flex(row, center, center);
+          border-radius: 500px;
+          width: 28px;
+          height: 28px;
+          background: $white;
+        }
+      }
+    }
+  }
+
+  .login_image {
+    // margin-left: 120px;
+    // border: 1px solid black;
+    width: 600px;
+    position: relative;
+
+
+    .before_image,
+    .after_image {
+      margin: 27px;
+      width: 500px;
+      height: 500px;
+      border-radius: 5px;
+    }
+
+    .before_image {
+      position: absolute;
+      top: -25px;
+      left: -25px;
+    }
+  }
 }
