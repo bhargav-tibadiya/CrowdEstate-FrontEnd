@@ -1,140 +1,94 @@
 @import '../../style/_constant.scss';
-$color2:#AFB2BF;
-
-.navbar{
-    @include flex(row,center,space-between);
-    color: $white;
-    background-color: $color1;
-    padding: 17.5px 120px;
-
-    .website_logo{
-        @include flex(row,center,center);
-        .circle_logo{
-            @include flex(row,center,center);
-            width: 32px;
-            height: 32px;
-            background-color: $white;
-            color: $black;
-            font-size: 25px;
-            font-weight: bolder;
-            border-radius: 50%;
-            margin-right: 6.4px;
-            // padding: 2px;
-        }
-        span{
-            font-size: 20.5px;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-        }
-    }
-    .website_section{
-        width: 100%;
-        margin: 0px 32px;
-        ul{
-            @include flex(row,center,center);
-
-            li{
-                @include flex(row,center,center);
-                list-style: none;
-                padding: 4px 12px;
-                a{
-                    text-decoration: none;
-                    color: $white;
-                    font-size: 16px;
-                }
-                
-            }
-        
-        }
-        .active{
-            color: #A9DD24;
-            font-weight: 700;
-        }
-
-    }
-    .website_other_icon{
-        width: 160px;
-        color: $color2;
-        @include flex(row,center,flex-end);
-        .search_icon{
-            @include flex(row,center,center);
-            width: 20px;
-            height: 20px;
-            margin-right: 20px;
-            cursor: pointer;
-        }
-
-        button{
-            width: 78px;
-            padding: 8px 12px;
-            font-size: 16px;
-            font-weight: 500;
-            border: 1px solid $color2;
-            outline: 0;
-            background: none;
-            color: $color2;
-            border-radius: 8px;
-            cursor: pointer;
-
-            &:hover{
-                border-color: $white;
-                color: $white;
-            }
-        }
-    
-    }
-}
 
 .navbar {
-  height: 64%;
   @include flex(row, center, space-between);
   color: $white;
-  background-color: $color1;
+  background-color: $secondary;
   padding: 17.5px 120px;
 
   .website_logo {
+    @include flex(row, center, center);
+    gap: 10px;
+
     .circle_logo {
-      width: 32px;
-      height: 32px;
+      @include flex(row, center, center);
+      width: 38px;
+      height: 38px;
       background-color: $white;
       color: $black;
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 32px;
+      font-weight: bolder;
+      border-radius: 50%;
+      margin-right: 6.4px;
+      // padding: 2px;
+    }
+
+    span {
+      font-size: 32px;
+      letter-spacing: 0.5px;
+      font-weight: 700;
     }
   }
 
   .website_section {
+    @include flex(row, center, center);
+
     width: 100%;
     margin: 0px 32px;
 
-    ul {
-      @include flex(row, center, center);
+    font-size: 18px;
+    line-height: 24px;
 
-      li {
-        list-style: none;
-        padding: 4px 12px;
+    .nav_items {
+      @include flex(row, flex-end, center);
+      gap: 5px;
+      padding: 4px 12px;
+      min-width: 100px;
+      cursor: pointer;
 
-        a {
-          text-decoration: none;
-          color: $white;
-          font-size: 16px;
-        }
+      &.active {
+        color: $active;
       }
-
     }
-
   }
 
   .website_other_icon {
-    @include flex(row, center, flex-end);
+    @include flex(row, center, center);
+
     width: 160px;
+    color: $color1;
+    gap: 10px;
+
+    .search_icon {
+      @include flex(row, center, center);
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      color: $white;
+
+      svg {
+        width: 20px;
+        height: 20px;
+
+      }
+    }
 
     button {
-      width: 78px;
+      min-width: 100px;
       padding: 8px 12px;
-      font-size: 16px;
-      // font-weight: 400;
+      font-size: 18px;
+      font-weight: 500;
+      color: $grey2;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid $grey1;
+      background: transparent;
+
+      &:hover {
+        border-color: $white;
+        color: $white;
+      }
     }
+
   }
 }
-

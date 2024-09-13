@@ -1,5 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: inter;
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Satoshi;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/asset/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
 }

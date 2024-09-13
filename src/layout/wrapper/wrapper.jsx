@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
+import Navbar from "../../components/navbar/Navbar"
 
 const Wrapper = () => {
   return (
     <>
-      {/* //TODO Remove this comment once navbar is done */}
-      {/* <Navbar /> */}
+      <Navbar />
       <Outlet />
     </>
   )
