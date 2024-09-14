@@ -1,0 +1,124 @@
+@import '../../style/_constant.scss';
+
+.otp_container {
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 78px);
+  top: 78px;
+  left: 0;
+  background: $primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content_container {
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    background-color: $primary;
+    padding: 32px;
+
+    .heading {
+      display: flex;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 38px;
+      color: $white;
+      padding-bottom: 12px;
+    }
+
+    .instructions {
+      display: flex;
+      font-size: 18px;
+      line-height: 26px;
+      color: $grey2;
+      padding-bottom: 24px;
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 24px;
+
+      input {
+        @include flex(row, center, center);
+
+        padding: 12px;
+        min-height: 50px;
+        max-width: 60px;
+
+        font-size: 16px;
+        line-height: 24px;
+        color: $white;
+
+        background: $grey1;
+        border-radius: 8px;
+        color: $white;
+        text-align: center;
+
+        border: none;
+        outline: none;
+        box-shadow: 0px 1px 0px $grey2;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+
+        &:focus-visible {
+          border: 2px solid $active;
+        }
+      }
+
+    }
+
+    .verify {
+      width: 100%;
+      margin-bottom: 12px;
+
+      & button {
+        width: 100%;
+        background: $active;
+        color: $black;
+
+        border: none;
+        outline: none;
+        border-radius: 8px;
+
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+        padding: 12px 0;
+
+      }
+    }
+
+    .actions {
+      @include flex(row, center, space-between);
+      cursor: pointer;
+
+      gap: 12px;
+      padding: 12px;
+
+      .back {
+        @include flex(row, center, flex-start);
+
+        width: 100%;
+
+        gap: 5px;
+        color: $white
+      }
+
+      .resend {
+        @include flex(row, center, flex-end);
+
+        width: 100%;
+
+        gap: 5px;
+        color: $blue
+      }
+    }
+  }
+}
