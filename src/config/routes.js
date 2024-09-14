@@ -6,5 +6,6 @@ export const routes = {
   contact: '/contact',
   login: '/login',
   notfound: '/404',
-  test: '/test'
+  test: '/test',
+  signup: '/signup',
 }
