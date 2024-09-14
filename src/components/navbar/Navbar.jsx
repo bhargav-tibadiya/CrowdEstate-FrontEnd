@@ -8,8 +8,6 @@ const Navbar = () => {
 
   const [selectedMenu, SetSelectedMenu] = useState(0)
 
-  console.log('selectedMenu', selectedMenu)
-
   const navigate = useNavigate();
   const location = useLocation();
 
