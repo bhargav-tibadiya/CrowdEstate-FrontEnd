@@ -1,0 +1,166 @@
+@import "../../components/navbar/Navbar.module.scss";
+@import "../../style/constant";
+
+.signup_container {
+    @include flex(row, flex-start, center);
+    gap: 250px;
+
+    background-color: $primary;
+    padding: 60px 120px;
+
+    .signup_input_form {
+        padding: 32px;
+
+        .head_details {
+            margin-bottom: 60px;
+
+            h1 {
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 38px;
+                margin-bottom: 12px;
+                color: $white;
+            }
+
+            p {
+                font-family: "Edu SA Beginner";
+                font-size: 18px;
+                line-height: 26px;
+                color: $grey2;
+            }
+        }
+
+        .form_container {
+            margin-bottom: 36px;
+
+            .username {
+                @include flex(row, center, space-between);
+                width: 100%;
+                gap: 20px;
+
+                .input_fields {
+                    width: 200px;
+
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .phone_number {
+                @include flex(row, center, space-between);
+                .select_phone_number {
+                    @include flex(row, center, space-between);
+                    width: 420px;
+                    gap: 20px;
+                    select{
+                        width: 81px;
+                    }
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .input_fields {
+                @include flex(column, flex-start, flex-start);
+                gap: 6px;
+
+                margin-bottom: 20px;
+                position: relative;
+                width: 100%;
+
+                label {
+                    color: $grey2;
+                    font-size: 14px;
+                    font-weight: 300;
+                    padding-bottom: 6px;
+                    line-height: 22px;
+                }
+
+                input,
+                select {
+                    width: 420px;
+                    padding: 12px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    border: 0;
+                    outline: 0;
+                    background: $secondary;
+                    border-radius: 8px;
+                    box-shadow: 0px 1px 0px $grey2;
+                    margin-bottom: 6px;
+                    color: $grey2;
+                }
+
+                span {
+                    position: absolute;
+                    right: 12px;
+                    transform: translateY(58%);
+                    cursor: pointer;
+                }
+
+                .forgot_password {
+                    width: 100%;
+                    color: $blue;
+                    font-size: 12px;
+                    line-height: 20px;
+                    text-align: right;
+                }
+            }
+        }
+
+        .button_signup {
+            button {
+                @include flex(row, center, center);
+                gap: 10px;
+                width: 100%;
+                padding: 12px;
+                // margin-bottom: 36px;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                border: 0;
+                outline: 0;
+                background: $active;
+                border-radius: 8px;
+                cursor: pointer;
+
+                img {
+                    width: 18px;
+                }
+            }
+
+            .google_login_btn {
+                .google_img {
+                    @include flex(row, center, center);
+                    border-radius: 500px;
+                    width: 28px;
+                    height: 28px;
+                    background: $white;
+                }
+            }
+        }
+    }
+
+    .signup_image {
+        // margin-left: 120px;
+        // border: 1px solid black;
+        width: 600px;
+        position: relative;
+
+        .before_image,
+        .after_image {
+            margin: 27px;
+            width: 500px;
+            height: 500px;
+            border-radius: 5px;
+        }
+
+        .before_image {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+        }
+    }
+}

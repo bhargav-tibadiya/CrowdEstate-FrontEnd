@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <div className={styles.website_other_icon}>
         <div className={styles.search_icon}><FaSearch /></div>
-        <button onClick={() => navigate(routes.login)}>Sign up</button>
+        <button onClick={() => navigate(routes.signup)}>Sign up</button>
       </div>
     </div>
   )

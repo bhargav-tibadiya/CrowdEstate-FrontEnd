@@ -6,6 +6,7 @@ import './App.scss'
 import Wrapper from './layout/wrapper/wrapper'
 import Home from './pages/home/Home'
 import Login from './pages/Login/Login'
+import Signup from './pages/Signup/Signup'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={routes.about} element={<Home />} />
           <Route path={routes.contact} element={<Home />} />
           <Route path={routes.login} element={<Login />} />
+          <Route path={routes.signup} element={<Signup />} />
           <Route path='*' element={<Home />} />
         </Route>
       </Routes>
