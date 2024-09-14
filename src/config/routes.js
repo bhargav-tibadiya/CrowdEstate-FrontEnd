@@ -4,6 +4,7 @@ export const routes = {
   app: '/app',
   about: '/about',
   contact: '/contact',
-  login:'/login',
+  login: '/login',
+  signup: '/signup',
   notfound: '/404'
 }

@@ -22,7 +22,7 @@ const Login = () => {
           <p>Discover your Future</p>
         </div>
 
-        <div className={styles.form_container}>
+        <div className={styles.form_container}> 
           <form>
 
             <div className={styles.input_fields}>

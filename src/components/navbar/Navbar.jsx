@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { FaSearch, FaAngleDown } from "react-icons/fa";
 import styles from "./Navbar.module.scss"
 import { routes } from "../../config/routes";
@@ -11,6 +11,7 @@ const Navbar = () => {
   console.log('selectedMenu', selectedMenu)
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className={styles.navbar}>
@@ -29,7 +30,12 @@ const Navbar = () => {
 
       <div className={styles.website_other_icon}>
         <div className={styles.search_icon}><FaSearch /></div>
-        <button onClick={() => navigate(routes.login)}>Sign up</button>
+        {
+          location.pathname == '/login' ?
+            <button onClick={() => navigate(routes.signup)}>Sign up</button>
+            :
+            <button onClick={() => navigate(routes.login)}>Login</button>
+        }
       </div>
     </div>
   )
