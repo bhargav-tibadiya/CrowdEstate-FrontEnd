@@ -3,7 +3,8 @@
 .otp_container {
   position: absolute;
   width: 100%;
-  height: calc(100vh - 78px);
+  z-index: 500;
+  height: 100%;
   top: 78px;
   left: 0;
   background: $primary;
@@ -82,6 +83,7 @@
         width: 100%;
         background: $active;
         color: $black;
+        cursor: pointer;
 
         border: none;
         outline: none;
@@ -97,7 +99,6 @@
 
     .actions {
       @include flex(row, center, space-between);
-      cursor: pointer;
 
       gap: 12px;
       padding: 12px;
@@ -106,6 +107,7 @@
         @include flex(row, center, flex-start);
 
         width: 100%;
+        cursor: pointer;
 
         gap: 5px;
         color: $white
@@ -115,6 +117,7 @@
         @include flex(row, center, flex-end);
 
         width: 100%;
+        cursor: pointer;
 
         gap: 5px;
         color: $blue

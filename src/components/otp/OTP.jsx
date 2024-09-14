@@ -1,13 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState } from 'react';
 import styles from './OTP.module.scss'
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
 
-const OTP = () => {
+const OTP = ({ formik, setIsOtpModalOpen }) => {
 
   const [otp, setOtp] = useState('');
 
   const inputRefs = useRef([]);
+
 
   const handleChange = (event, index) => {
     const { value } = event.target;
@@ -15,14 +17,17 @@ const OTP = () => {
     setOtp(currentOtp => {
       const newOtp = currentOtp.split('');
       newOtp[index] = value;
-      return newOtp.join('');
+      const updatedOtp = newOtp.join('');
+
+      formik.setFieldValue('otp', updatedOtp);
+      return updatedOtp;
     });
 
-    // Move to next input if value is entered
     if (value !== '' && index < 5) {
       inputRefs.current[index + 1].focus();
     }
   };
+
 
   const handleKeyDown = (event, index) => {
     if (event.key === 'Backspace' && !event.target.value && index > 0) {
@@ -50,10 +55,12 @@ const OTP = () => {
             />
           ))}
         </div>
-        <div className={styles.verify} ><button>Verify and Register</button></div>
+        <div className={styles.verify} >
+          <button type='button' onClick={() => formik.handleSubmit()}>Verify and Register</button>
+        </div>
         <div className={styles.actions} >
-          <div className={styles.back}> <IoMdArrowRoundBack /> <span>Back to Sign Up</span> </div>
-          <div className={styles.resend}><GrPowerReset /> <span>Reset Password</span> </div>
+          <div className={styles.back} onClick={() => setIsOtpModalOpen(false)}> <IoMdArrowRoundBack /> <span>Back to Sign Up</span> </div>
+          <div className={styles.resend}><GrPowerReset /> <span>Resend Email</span> </div>
         </div>
       </div>
 
