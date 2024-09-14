@@ -33,7 +33,10 @@
         .form_container {
             margin-bottom: 36px;
 
-            .username {
+            
+
+            .username,
+            .state_country_name {
                 @include flex(row, center, space-between);
                 width: 100%;
                 gap: 20px;
@@ -41,7 +44,8 @@
                 .input_fields {
                     width: 200px;
 
-                    input {
+                    input,
+                    select {
                         width: 100%;
                     }
                 }
@@ -53,9 +57,22 @@
                     @include flex(row, center, space-between);
                     width: 420px;
                     gap: 20px;
-                    select{
+                    select {
                         width: 81px;
                     }
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .password_section {
+                width: 100%;
+                @include flex(row, center, space-between);
+                gap: 20px;
+                .input_fields {
+                    width: 200px;
+
                     input {
                         width: 100%;
                     }
@@ -78,6 +95,12 @@
                     line-height: 22px;
                 }
 
+                .important {
+                    color: $error;
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+
                 input,
                 select {
                     width: 420px;
@@ -93,19 +116,11 @@
                     color: $grey2;
                 }
 
-                span {
+                .password_Visibility{
                     position: absolute;
-                    right: 12px;
+                    right: 15px;
                     transform: translateY(58%);
                     cursor: pointer;
-                }
-
-                .forgot_password {
-                    width: 100%;
-                    color: $blue;
-                    font-size: 12px;
-                    line-height: 20px;
-                    text-align: right;
                 }
             }
         }
@@ -130,22 +145,10 @@
                     width: 18px;
                 }
             }
-
-            .google_login_btn {
-                .google_img {
-                    @include flex(row, center, center);
-                    border-radius: 500px;
-                    width: 28px;
-                    height: 28px;
-                    background: $white;
-                }
-            }
         }
     }
 
     .signup_image {
-        // margin-left: 120px;
-        // border: 1px solid black;
         width: 600px;
         position: relative;
 
