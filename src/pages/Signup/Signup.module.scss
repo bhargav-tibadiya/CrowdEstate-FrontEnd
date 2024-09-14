@@ -2,168 +2,174 @@
 @import "../../style/constant";
 
 .signup_container {
-    @include flex(row, flex-start, center);
-    gap: 250px;
+  @include flex(row, flex-start, center);
+  gap: 250px;
 
-    background-color: $primary;
-    padding: 60px 120px;
+  background-color: $primary;
+  padding: 60px 120px;
 
-    .signup_input_form {
-        padding: 32px;
+  .signup_input_form {
+    padding: 32px;
+    max-width: 650px;
 
-        .head_details {
-            margin-bottom: 60px;
+    .head_details {
+      margin-bottom: 30px;
 
-            h1 {
-                font-weight: bold;
-                font-size: 30px;
-                line-height: 38px;
-                margin-bottom: 12px;
-                color: $white;
-            }
+      h1 {
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 12px;
+        color: $white;
+      }
 
-            p {
-                font-family: "Edu SA Beginner";
-                font-size: 18px;
-                line-height: 26px;
-                color: $grey2;
-            }
-        }
-
-        .form_container {
-            margin-bottom: 36px;
-
-            
-
-            .username,
-            .state_country_name {
-                @include flex(row, center, space-between);
-                width: 100%;
-                gap: 20px;
-
-                .input_fields {
-                    width: 200px;
-
-                    input,
-                    select {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .phone_number {
-                @include flex(row, center, space-between);
-                .select_phone_number {
-                    @include flex(row, center, space-between);
-                    width: 420px;
-                    gap: 20px;
-                    select {
-                        width: 81px;
-                    }
-                    input {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .password_section {
-                width: 100%;
-                @include flex(row, center, space-between);
-                gap: 20px;
-                .input_fields {
-                    width: 200px;
-
-                    input {
-                        width: 100%;
-                    }
-                }
-            }
-
-            .input_fields {
-                @include flex(column, flex-start, flex-start);
-                gap: 6px;
-
-                margin-bottom: 20px;
-                position: relative;
-                width: 100%;
-
-                label {
-                    color: $grey2;
-                    font-size: 14px;
-                    font-weight: 300;
-                    padding-bottom: 6px;
-                    line-height: 22px;
-                }
-
-                .important {
-                    color: $error;
-                    font-size: 14px;
-                    line-height: 22px;
-                }
-
-                input,
-                select {
-                    width: 420px;
-                    padding: 12px;
-                    font-size: 16px;
-                    font-weight: 500;
-                    border: 0;
-                    outline: 0;
-                    background: $secondary;
-                    border-radius: 8px;
-                    box-shadow: 0px 1px 0px $grey2;
-                    margin-bottom: 6px;
-                    color: $grey2;
-                }
-
-                .password_Visibility{
-                    position: absolute;
-                    right: 15px;
-                    transform: translateY(58%);
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .button_signup {
-            button {
-                @include flex(row, center, center);
-                gap: 10px;
-                width: 100%;
-                padding: 12px;
-                // margin-bottom: 36px;
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 24px;
-                border: 0;
-                outline: 0;
-                background: $active;
-                border-radius: 8px;
-                cursor: pointer;
-
-                img {
-                    width: 18px;
-                }
-            }
-        }
+      p {
+        font-family: "Edu SA Beginner";
+        font-size: 18px;
+        line-height: 26px;
+        color: $grey2;
+      }
     }
 
-    .signup_image {
-        width: 600px;
+    .form_container {
+      margin-bottom: 36px;
+
+      .username,
+      .state_country_name {
+        @include flex(row, center, space-between);
+        width: 100%;
+        gap: 20px;
+
+        .input_fields {
+
+          input,
+          select {
+            width: 100%;
+          }
+        }
+      }
+
+      .phone_number {
+        @include flex(row, center, space-between);
+
+        .select_phone_number {
+          @include flex(row, center, space-between);
+          width: 100%;
+          gap: 20px;
+
+          select {
+            width: 100px;
+          }
+
+          input {
+            width: 100%;
+          }
+        }
+      }
+
+      .password_section {
+        width: 100%;
+        @include flex(row, center, space-between);
+        gap: 20px;
+
+        .input_fields {
+          width: 100%;
+
+          .password_input {
+            width: 100%;
+          }
+
+          input {
+            width: 100%;
+          }
+        }
+      }
+
+      .input_fields {
+        @include flex(column, flex-start, flex-start);
+        gap: 6px;
+
+        margin-bottom: 20px;
         position: relative;
+        width: 100%;
 
-        .before_image,
-        .after_image {
-            margin: 27px;
-            width: 500px;
-            height: 500px;
-            border-radius: 5px;
+        label {
+          color: $grey2;
+          font-size: 14px;
+          font-weight: 300;
+          padding-bottom: 6px;
+          line-height: 22px;
         }
 
-        .before_image {
-            position: absolute;
-            top: -25px;
-            left: -25px;
+        .important {
+          color: $error;
+          font-size: 14px;
+          line-height: 22px;
         }
+
+        input,
+        select {
+          width: 100%;
+          padding: 12px;
+          font-size: 16px;
+          font-weight: 500;
+          border: 0;
+          outline: 0;
+          background: $secondary;
+          border-radius: 8px;
+          box-shadow: 0px 1px 0px $grey2;
+          margin-bottom: 6px;
+          color: $grey2;
+        }
+
+        .password_Visibility {
+          position: absolute;
+          right: 15px;
+          transform: translateY(58%);
+          cursor: pointer;
+        }
+      }
     }
+
+    .button_signup {
+      font-weight: bold;
+
+      & button {
+        width: 100%;
+        background: $active;
+        color: $black;
+
+        cursor: pointer;
+
+        border: none;
+        outline: none;
+        border-radius: 8px;
+
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+        padding: 12px 0;
+
+      }
+    }
+  }
+
+  .signup_image {
+    width: 600px;
+    position: relative;
+
+    .before_image,
+    .after_image {
+      margin: 27px;
+      width: 500px;
+      height: 500px;
+      border-radius: 5px;
+    }
+
+    .before_image {
+      position: absolute;
+      top: -25px;
+      left: -25px;
+    }
+  }
 }
