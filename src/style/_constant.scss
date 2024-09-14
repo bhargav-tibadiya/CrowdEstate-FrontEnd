@@ -11,6 +11,8 @@ $secondary : #161D29;
 $grey1 : #2C333F;
 $grey2 : #AFB2BF;
 
+$error:#EF476F;
+
 @mixin flex ($direction, $align, $justify) {
   display: flex;
   flex-direction: $direction;
