@@ -59,7 +59,7 @@ const OTP = ({ formik, setIsOtpModalOpen }) => {
           <button type='button' onClick={() => formik.handleSubmit()}>Verify and Register</button>
         </div>
         <div className={styles.actions} >
-          <div className={styles.back} onClick={() => setIsOtpModalOpen(false)}> <IoMdArrowRoundBack /> <span>Back to Sign Up</span> </div>
+          <div className={styles.back} onClick={() => setIsOtpModalOpen(false), window.scrollTo(0, 0)}> <IoMdArrowRoundBack /> <span>Back to Sign Up</span> </div>
           <div className={styles.resend}><GrPowerReset /> <span>Resend Email</span> </div>
         </div>
       </div>

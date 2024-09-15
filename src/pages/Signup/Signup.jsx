@@ -104,7 +104,7 @@ const Signup = () => {
 
   return (
 
-    <div className={styles.signup_container}>
+    <div className={`${styles.signup_container} ${isOtpModalOpen ? styles.scrollDisable : ''}`}>
 
 
       <div className={styles.signup_input_form}>
