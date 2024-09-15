@@ -3,4 +3,6 @@
 .app_container {
   background: $primary;
   min-height: 100vh;
+  position: relative;
+  z-index: 10;
 }

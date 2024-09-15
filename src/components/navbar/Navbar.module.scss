@@ -3,8 +3,14 @@
 .navbar {
   @include flex(row, center, space-between);
   color: $white;
-  background-color: $secondary;
+  background: $secondary;
   padding: 17.5px 120px;
+  position: relative;
+  z-index: 15;
+
+  @media screen and (max-width:475px) {
+    padding: 17.5px 25px;
+  }
 
   .website_logo {
     @include flex(row, center, center);
@@ -19,14 +25,23 @@
       font-size: 32px;
       font-weight: bolder;
       border-radius: 50%;
-      margin-right: 6.4px;
+
       // padding: 2px;
+      @media screen and (max-width:475px) {
+        width: 28px;
+        height: 28px;
+        font-size: 24px;
+      }
     }
 
     span {
       font-size: 32px;
       letter-spacing: 0.5px;
       font-weight: 700;
+
+      @media screen and (max-width:475px) {
+        font-size: 24px;
+      }
     }
   }
 
@@ -38,6 +53,10 @@
 
     font-size: 18px;
     line-height: 24px;
+
+    @media screen and (max-width:475px) {
+      display: none;
+    }
 
     .nav_items {
       @include flex(row, flex-end, center);
@@ -58,6 +77,10 @@
     width: 160px;
     color: $color1;
     gap: 10px;
+
+    @media screen and (max-width:475px) {
+      display: none;
+    }
 
     .search_icon {
       @include flex(row, center, center);
@@ -91,4 +114,41 @@
     }
 
   }
+
+  .hamburger {
+    display: none;
+    font-size: 24px;
+
+    @media screen and (max-width:475px) {
+      display: flex;
+    }
+
+    .hamburger_menu {
+      @include flex(column, center, center);
+      gap: 15px;
+
+      background-color: $primary;
+      position: absolute;
+      z-index: -1;
+      top: 67px;
+      left: 0;
+      height: calc(100vh - 67px);
+      width: 100vw;
+      scroll-behavior: smooth;
+
+      .nav_items {
+        @include flex(row, flex-end, center);
+        gap: 5px;
+        padding: 4px 12px;
+        min-width: 100px;
+        cursor: pointer;
+
+        &.active {
+          color: $active;
+        }
+      }
+
+    }
+  }
+
 }
