@@ -52,59 +52,83 @@
 
       .input_fields {
         @include flex(column, flex-start, flex-start);
-        gap: 6px;
-
-        margin-bottom: 20px;
-        position: relative;
         width: 100%;
 
         @media screen and (max-width:475px) {
           margin-bottom: 10px;
+          flex-direction: column;
+          gap: 0;
         }
 
-        label {
-          color: $grey2;
-          font-size: 14px;
-          font-weight: 300;
-          padding-bottom: 6px;
-          line-height: 22px;
+        .fields {
+          width: 100%;
 
           @media screen and (max-width:475px) {
-            padding-bottom: unset;
+            margin-bottom: 10px;
+          }
+
+          label {
+            color: $grey2;
+            font-size: 14px;
+            font-weight: 300;
+            padding-bottom: 6px;
+            line-height: 22px;
+
+            @media screen and (max-width:475px) {
+              padding-bottom: unset;
+            }
+          }
+
+          input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            border: 0;
+            outline: 0;
+            background: $secondary;
+            border-radius: 8px;
+            box-shadow: 0px 1px 0px $grey2;
+            margin-bottom: 6px;
+            color: $grey2;
+          }
+
+          span {
+            position: absolute;
+            right: 12px;
+            transform: translateY(58%);
+            cursor: pointer;
+          }
+
+
+          .input_fields_input {
+            width: 100%;
           }
         }
+      }
 
-        input {
-          width: 100%;
-          padding: 12px;
-          font-size: 16px;
-          font-weight: 500;
-          border: 0;
-          outline: 0;
-          background: $secondary;
-          border-radius: 8px;
-          box-shadow: 0px 1px 0px $grey2;
-          margin-bottom: 6px;
-          color: $grey2;
-        }
+      .forgot_password {
+        width: 100%;
+        color: $blue;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: right;
+      }
+
+      .formik_error {
+        display: flex;
+        gap: 5px;
+        min-height: 20px;
+        min-width: 100%;
+        color: $error;
+        font-size: 14px;
 
         span {
-          position: absolute;
-          right: 12px;
-          transform: translateY(58%);
-          cursor: pointer;
+          @include flex(row, center, center)
         }
 
-        .forgot_password {
-          width: 100%;
-          color: $blue;
+        @media screen and (max-width:475px) {
           font-size: 12px;
-          line-height: 20px;
-          text-align: right;
-        }
-
-        .input_fields_input {
-          width: 100%;
         }
       }
     }
