@@ -22,7 +22,7 @@ const Login = () => {
           <p>Discover your Future</p>
         </div>
 
-        <div className={styles.form_container}> 
+        <div className={styles.form_container}>
           <form>
 
             <div className={styles.input_fields}>
@@ -32,7 +32,7 @@ const Login = () => {
 
             <div className={styles.input_fields}>
               <label htmlFor="Password">Password</label>
-              <div>
+              <div className={styles.input_fields_input}>
                 <input type={isPasswordVisible ? "text" : "password"} name="Password" placeholder="Enter Password" />
                 <span onClick={() => setisPasswordVisible((prev) => (!prev))}>
                   {
