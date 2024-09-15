@@ -96,9 +96,25 @@ const Signup = () => {
 
   const verifyDetails = () => {
     if (isValid && dirty) {
+
       setIsOtpModalOpen(true)
+
     } else {
+
+      formik.setTouched({
+        firstName: true,
+        lastName: true,
+        email: true,
+        contactNumber: true,
+        password: true,
+        confirmPassword: true,
+        address: true,
+        state: true,
+        country: true
+      });
+
       validateForm()
+
     }
   }
 
