@@ -49,6 +49,7 @@
 
     .form_container {
       margin-bottom: 36px;
+      position: relative;
 
       .input_fields {
         @include flex(column, flex-start, flex-start);

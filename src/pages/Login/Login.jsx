@@ -4,9 +4,19 @@ import styles from "./Login.module.scss"
 
 // --> Importing Packges <--
 import * as Yup from 'yup';
+import toast from "react-hot-toast";
 import { useFormik } from "formik"
 import { useGoogleLogin } from "@react-oauth/google";
 
+// --> Importing Services <--
+import { loginAPI } from "../../services/authApi";
+
+// --> Importing Assets <--
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import LoginImage from '/asset/images/property/img1.jpg';
+import TextureImage from '/asset/images/bg_texture.png';
+import Google from "../../images/google.png"
+import { MdError } from "react-icons/md";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -20,13 +30,6 @@ const validationSchema = Yup.object().shape({
 })
 
 
-// --> Importing Assets <--
-import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import LoginImage from '/asset/images/property/img1.jpg';
-import TextureImage from '/asset/images/bg_texture.png';
-import Google from "../../images/google.png"
-import { MdError } from "react-icons/md";
-
 const Login = () => {
 
   const [isPasswordVisible, setisPasswordVisible] = useState(false);
@@ -39,6 +42,7 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log('Form values:', values);
+      handleLogin(values.email, values.password);
     }
   });
 
@@ -58,7 +62,32 @@ const Login = () => {
     flow: 'implicit',
   });
 
-  const { values, handleChange, handleBlur, touched, errors, handleSubmit, submitForm } = formik
+  const handleLogin = async (email, password) => {
+    try {
+
+      const payload = {
+        email: email,
+        password: password
+      }
+      const result = await loginAPI(payload)
+      console.log("Login API Result", result);
+
+      if (result.success === true) {
+        toast.success('Login Successful')
+      } else {
+        toast.error(result.message)
+      }
+
+    } catch (error) {
+
+      console.log('Error While Login\n Check Login.jsx #FE002', error);
+      console.log('Reason :', error?.response?.data?.message)
+      throw error
+
+    }
+  }
+
+  const { values, handleChange, handleBlur, touched, errors, handleSubmit } = formik
 
   return (
 
