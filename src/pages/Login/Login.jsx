@@ -6,10 +6,27 @@ import Google from "../../images/google.png"
 
 import styles from "./Login.module.scss"
 import { useState } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
 
-  const [isPasswordVisible, setisPasswordVisible] = useState(false);;
+  const [isPasswordVisible, setisPasswordVisible] = useState(false);
+
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log('Login Success: ', tokenResponse);
+      // Now use the token to fetch user info if needed
+      fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${tokenResponse.access_token}`)
+        .then(response => response.json())
+        .then(data => console.log('User Info:', data))
+        .catch(error => console.error('Error fetching user info:', error));
+    },
+    onError: (errorResponse) => {
+      console.log('Login Failed:', errorResponse);
+    },
+    scope: 'openid profile email',
+    flow: 'implicit',
+  });
 
   return (
 
@@ -48,7 +65,7 @@ const Login = () => {
 
         <div className={styles.button_login}>
           <button>Sign in</button><br />
-          <button className={styles.google_login_btn}>
+          <button className={styles.google_login_btn} onClick={() => loginWithGoogle()}>
             <div className={styles.google_img}>
               <img src={Google} alt="loading" />
             </div>
