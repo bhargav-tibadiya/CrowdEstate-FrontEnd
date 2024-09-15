@@ -136,6 +136,24 @@
       width: 100vw;
       scroll-behavior: smooth;
 
+      button {
+        margin-top: 32px;
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 18px;
+        font-weight: 500;
+        color: $grey2;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 1px solid $grey1;
+        background: transparent;
+
+        &:hover {
+          border-color: $white;
+          color: $white;
+        }
+      }
+
       .nav_items {
         @include flex(row, flex-end, center);
         gap: 5px;

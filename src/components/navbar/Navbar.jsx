@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { FaSearch, FaAngleDown } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
-import { RiCloseLargeLine } from "react-icons/ri";
 import styles from "./Navbar.module.scss"
 import { routes } from "../../config/routes";
 import { useState } from "react";
@@ -51,6 +50,12 @@ const Navbar = () => {
             <div className={`${styles.nav_items} ${selectedMenu == 1 ? styles.active : ""}`} onClick={() => { navigate(routes.app), SetSelectedMenu(1) }}> <span>App </span><FaAngleDown /></div>
             <div className={`${styles.nav_items} ${selectedMenu == 2 ? styles.active : ""}`} onClick={() => { navigate(routes.about), SetSelectedMenu(2) }}>About us</div>
             <div className={`${styles.nav_items} ${selectedMenu == 3 ? styles.active : ""}`} onClick={() => { navigate(routes.contact), SetSelectedMenu(3) }}>Contact us</div>
+            {
+              location.pathname == '/login' ?
+                <button onClick={() => navigate(routes.signup)}>Sign up</button>
+                :
+                <button onClick={() => navigate(routes.login)}>Login</button>
+            }
           </div>
         }
       </div>
