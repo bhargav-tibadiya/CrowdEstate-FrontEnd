@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",
     "jsonwebtoken": "^9.0.2",
