@@ -96,15 +96,31 @@ const Signup = () => {
 
   const verifyDetails = () => {
     if (isValid && dirty) {
+
       setIsOtpModalOpen(true)
+
     } else {
+
+      formik.setTouched({
+        firstName: true,
+        lastName: true,
+        email: true,
+        contactNumber: true,
+        password: true,
+        confirmPassword: true,
+        address: true,
+        state: true,
+        country: true
+      });
+
       validateForm()
+
     }
   }
 
   return (
 
-    <div className={styles.signup_container}>
+    <div className={`${styles.signup_container} ${isOtpModalOpen ? styles.scrollDisable : ''}`}>
 
 
       <div className={styles.signup_input_form}>

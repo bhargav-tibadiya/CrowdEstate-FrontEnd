@@ -7,12 +7,25 @@
   background-color: $primary;
   padding: 100px 120px;
 
+  @media screen and (max-width:475px) {
+    box-sizing: border-box;
+    flex-direction: column-reverse;
+    padding: 20px 25px;
+    gap: 25px;
+  }
 
   .login_input_form {
     padding: 32px;
+    min-width: 450px;
+
+    @media screen and (max-width:475px) {
+      min-width: unset;
+      padding: unset;
+      width: 100%;
+    }
 
     .head_details {
-      margin-bottom: 60px;
+      margin-bottom: 25px;
 
       h1 {
         font-weight: bold;
@@ -20,6 +33,10 @@
         line-height: 38px;
         margin-bottom: 12px;
         color: $white;
+
+        @media screen and (max-width:475px) {
+          margin: 0;
+        }
       }
 
       p {
@@ -41,16 +58,24 @@
         position: relative;
         width: 100%;
 
+        @media screen and (max-width:475px) {
+          margin-bottom: 10px;
+        }
+
         label {
           color: $grey2;
           font-size: 14px;
           font-weight: 300;
           padding-bottom: 6px;
           line-height: 22px;
+
+          @media screen and (max-width:475px) {
+            padding-bottom: unset;
+          }
         }
 
         input {
-          width: 420px;
+          width: 100%;
           padding: 12px;
           font-size: 16px;
           font-weight: 500;
@@ -76,6 +101,10 @@
           font-size: 12px;
           line-height: 20px;
           text-align: right;
+        }
+
+        .input_fields_input {
+          width: 100%;
         }
       }
     }
@@ -119,6 +148,12 @@
     // border: 1px solid black;
     width: 600px;
     position: relative;
+    box-sizing: border-box;
+
+    @media screen and (max-width:475px) {
+      @include flex(row, center, center);
+      width: 350px;
+    }
 
 
     .before_image,
@@ -127,12 +162,23 @@
       width: 500px;
       height: 500px;
       border-radius: 5px;
+
+      @media screen and (max-width:475px) {
+        margin: 25px 50px;
+        width: 300px;
+        height: 300px;
+      }
     }
 
     .before_image {
       position: absolute;
       top: -25px;
       left: -25px;
+
+      @media screen and (max-width:475px) {
+        top: -10px;
+        left: -10px;
+      }
     }
   }
 }

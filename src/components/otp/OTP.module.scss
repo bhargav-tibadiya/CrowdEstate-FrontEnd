@@ -11,6 +11,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  @media screen and (max-width:475px) {
+    top:67px;
+    height: calc(100vh - 67px);
+  }
 
   .content_container {
     display: flex;
