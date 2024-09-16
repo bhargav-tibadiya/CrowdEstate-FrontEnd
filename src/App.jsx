@@ -9,6 +9,8 @@ import Login from './pages/Login/Login'
 import OTP from './components/otp/OTP'
 import Signup from './pages/Signup/Signup'
 import { Toaster } from 'react-hot-toast'
+import AuthWrapper from './layout/wrapper/AuthWrapper'
+import LSWrapper from './layout/wrapper/LSWrapper'
 
 function App() {
   return (
@@ -17,18 +19,26 @@ function App() {
         style: {
           fontWeight: '600',
         }
-      }} /> 
+      }} />
       <Routes>
         <Route element={<Wrapper />}>
-          <Route path={routes.default} element={<Home />} />
-          <Route path={routes.home} element={<Home />} />
-          <Route path={routes.app} element={<Home />} />
-          <Route path={routes.about} element={<Home />} />
-          <Route path={routes.contact} element={<Home />} />
-          <Route path={routes.login} element={<Login />} />
+
           <Route path={routes.test} element={<OTP />} />
-          <Route path={routes.signup} element={<Signup />} />
-          <Route path='*' element={<Home />} />
+
+          <Route element={<LSWrapper />}>
+            <Route path={routes.login} element={<Login />} />
+            <Route path={routes.signup} element={<Signup />} />
+          </Route>
+
+          <Route element={<AuthWrapper />}>
+            <Route path={routes.default} element={<Home />} />
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.app} element={<Home />} />
+            <Route path={routes.about} element={<Home />} />
+            <Route path={routes.contact} element={<Home />} />
+            <Route path='*' element={<Home />} />
+          </Route>
+
         </Route>
       </Routes>
     </div>
