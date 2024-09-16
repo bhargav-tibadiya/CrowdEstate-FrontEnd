@@ -17,6 +17,7 @@ import LoginImage from '/asset/images/property/img1.jpg';
 import TextureImage from '/asset/images/bg_texture.png';
 import Google from "../../images/google.png"
 import { MdError } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +34,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
 
   const [isPasswordVisible, setisPasswordVisible] = useState(false);
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -73,7 +75,10 @@ const Login = () => {
       console.log("Login API Result", result);
 
       if (result.success === true) {
+
         toast.success('Login Successful')
+        navigate('/home')
+
       } else {
         toast.error(result.message)
       }
