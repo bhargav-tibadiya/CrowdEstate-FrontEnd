@@ -22,7 +22,7 @@ export const loginAPI = async (payload) => {
 export const otpAPI = async (payload) => {
   try {
 
-    const response = await axios.post(`${API_URL}/auth/otp`, payload, {
+    const response = await axios.post(`${API_URL}/auth/sendotp`, payload, {
       withCredentials: true
     });
     return response.data;
