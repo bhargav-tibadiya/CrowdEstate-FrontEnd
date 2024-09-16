@@ -8,10 +8,16 @@ import Home from './pages/home/Home'
 import Login from './pages/Login/Login'
 import OTP from './components/otp/OTP'
 import Signup from './pages/Signup/Signup'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
     <div className='app_container'>
+      <Toaster toastOptions={{
+        style: {
+          fontWeight: '600',
+        }
+      }} /> 
       <Routes>
         <Route element={<Wrapper />}>
           <Route path={routes.default} element={<Home />} />
