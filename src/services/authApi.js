@@ -5,7 +5,9 @@ const API_URL = import.meta.env.VITE_SERVER_BASE_URL;
 export const loginAPI = async (payload) => {
   try {
 
-    const response = await axios.post(`${API_URL}/auth/login`, payload);
+    const response = await axios.post(`${API_URL}/auth/login`, payload, {
+      withCredentials: true
+    });
     return response.data;
 
   } catch (error) {
