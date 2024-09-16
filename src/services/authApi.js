@@ -18,3 +18,38 @@ export const loginAPI = async (payload) => {
 
   }
 }
+
+export const otpAPI = async (payload) => {
+  try {
+
+    const response = await axios.post(`${API_URL}/auth/sendotp`, payload, {
+      withCredentials: true
+    });
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Login\n Check authAPi #FE003', error);
+    console.log('Reason :', error?.response?.data?.message)
+    return error.response.data
+
+  }
+}
+
+
+export const signupAPI = async (payload) => {
+  try {
+
+    const response = await axios.post(`${API_URL}/auth/signup`, payload, {
+      withCredentials: true
+    });
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Login\n Check authAPi #FE004', error);
+    console.log('Reason :', error?.response?.data?.message)
+    return error.response.data
+
+  }
+}

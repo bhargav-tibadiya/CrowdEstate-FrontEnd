@@ -11,6 +11,9 @@ import { MdError } from "react-icons/md";
 import SignupImage from '/asset/images/property/img1.jpg';
 import TextureImage from '/asset/images/bg_texture.png';
 import OTP from "../../components/otp/OTP";
+import { otpAPI, signupAPI } from "../../services/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 //  --> Validation Schema for Signup Details <--
 const validationSchema = Yup.object().shape({
@@ -73,7 +76,10 @@ const Signup = () => {
   const [isConfirmPasswordVisible, setisConfirmPasswordVisible] = useState(false);
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
 
+  const navigate = useNavigate()
+
   const formik = useFormik({
+
     initialValues: {
       firstName: '',
       lastName: '',
@@ -87,15 +93,55 @@ const Signup = () => {
       country: ''
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log('Form values:', values);
+
+      const payload = {
+        username: values.firstName + '_' + values.lastName,
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        contactNumber: values.contactNumber,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        otp: values.otp,
+        address: values.address,
+        state: values.state,
+        country: values.country,
+      }
+
+      const result = await signupAPI(payload)
+      console.log("Signup API Result", result);
+
+      if (result.success === true) {
+
+        toast.success('Signup Successful')
+        navigate('/home')
+
+      } else {
+
+        toast.error(result.message)
+
+      }
     }
   });
 
   const { values, handleChange, handleBlur, touched, errors, handleSubmit, isValid, dirty, validateForm } = formik
 
-  const verifyDetails = () => {
+  const verifyDetails = async () => {
+
     if (isValid && dirty) {
+
+      const payload = {
+        email: values.email,
+      }
+
+      const result = await toast.promise(otpAPI(payload), {
+        loading: 'Sending OTP...',
+        success: 'OTP sent successfully!',
+        error: 'Failed to send OTP',
+      })
+      console.log("OTP API Result", result);
 
       setIsOtpModalOpen(true)
 
