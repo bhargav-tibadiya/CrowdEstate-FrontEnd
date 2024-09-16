@@ -13,6 +13,7 @@ import TextureImage from '/asset/images/bg_texture.png';
 import OTP from "../../components/otp/OTP";
 import { otpAPI, signupAPI } from "../../services/authApi";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 //  --> Validation Schema for Signup Details <--
 const validationSchema = Yup.object().shape({
@@ -75,7 +76,10 @@ const Signup = () => {
   const [isConfirmPasswordVisible, setisConfirmPasswordVisible] = useState(false);
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
 
+  const navigate = useNavigate()
+
   const formik = useFormik({
+
     initialValues: {
       firstName: '',
       lastName: '',
@@ -93,7 +97,7 @@ const Signup = () => {
       console.log('Form values:', values);
 
       const payload = {
-        username: values.firstName+'_'+values.lastName,
+        username: values.firstName + '_' + values.lastName,
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
@@ -106,19 +110,26 @@ const Signup = () => {
         country: values.country,
       }
 
-      const result = await toast.promise(signupAPI(payload), {
-        loading: 'Registration in Progres',
-        success: 'Registration Success',
-        error: 'Registration Failed',
-      })
+      const result = await signupAPI(payload)
       console.log("Signup API Result", result);
 
+      if (result.success === true) {
+
+        toast.success('Signup Successful')
+        navigate('/home')
+
+      } else {
+
+        toast.error(result.message)
+
+      }
     }
   });
 
   const { values, handleChange, handleBlur, touched, errors, handleSubmit, isValid, dirty, validateForm } = formik
 
   const verifyDetails = async () => {
+
     if (isValid && dirty) {
 
       const payload = {
@@ -130,7 +141,7 @@ const Signup = () => {
         success: 'OTP sent successfully!',
         error: 'Failed to send OTP',
       })
-      console.log("Login API Result", result);
+      console.log("OTP API Result", result);
 
       setIsOtpModalOpen(true)
 
