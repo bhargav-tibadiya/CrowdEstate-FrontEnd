@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const API_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -8,6 +9,16 @@ export const loginAPI = async (payload) => {
     const response = await axios.post(`${API_URL}/auth/login`, payload, {
       withCredentials: true
     });
+
+    const cookieConfig = {
+      path: '/',
+      expires: new Date(Date.now() + (3 * 24 * 60 * 60 * 1000)),
+    }
+
+    if (response.data.token) {
+      Cookies.set('token', response.data.token, cookieConfig);
+    }
+
     return response.data;
 
   } catch (error) {
