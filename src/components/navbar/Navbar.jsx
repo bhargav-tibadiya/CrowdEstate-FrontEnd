@@ -50,6 +50,8 @@ const Navbar = () => {
               // Remove the token cookie
               Cookies.remove('token');
 
+              console.log('Cookies Removed')
+
               // Navigate to the login page
               navigate(routes.login);
             }}>Logout</button>
@@ -86,6 +88,7 @@ const Navbar = () => {
                 <button onClick={() => {
                   // Remove the token cookie
                   Cookies.remove('token');
+                  console.log('Cookies Removed')
 
                   // Navigate to the login page
                   navigate(routes.login);

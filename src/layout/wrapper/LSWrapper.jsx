@@ -25,6 +25,7 @@ const LSWrapper = () => {
 
           // Remove the expired token
           Cookies.remove('token');
+          console.log('Cookies Removed')
           console.log("Invalid Token LS");
 
         } else if (!decoded) {
@@ -42,6 +43,7 @@ const LSWrapper = () => {
 
         setIsAuthenticated(false);
         Cookies.remove('token');
+        console.log('Cookies Removed')
         console.log(error);
 
       }

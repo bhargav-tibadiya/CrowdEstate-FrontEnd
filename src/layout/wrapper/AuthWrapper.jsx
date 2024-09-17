@@ -24,6 +24,7 @@ const AuthWrapper = () => {
           setIsAuthenticated(false);
 
           // Remove the expired token
+          console.log('Cookies Removed')
           Cookies.remove('token');
           console.log("Invalid Token ");
           navigate('/login')
@@ -46,6 +47,7 @@ const AuthWrapper = () => {
 
         setIsAuthenticated(false);
         Cookies.remove('token');
+        console.log('Cookies Removed')
         console.log(error);
 
       }
