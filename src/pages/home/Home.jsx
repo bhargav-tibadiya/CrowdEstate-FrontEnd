@@ -65,6 +65,7 @@ const propertySchema = Yup.object().shape({
 const Home = () => {
 
   const [isTagOpen, setIsTagOpen] = useState()
+  const [tags, setTags] = useState([])
 
   const formik = useFormik({
     initialValues: {
@@ -97,6 +98,14 @@ const Home = () => {
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik
+
+  const handleTags = (tag) => {
+    if (tags.includes(tag)) {
+      setTags(tags.filter((t) => t !== tag));
+    } else {
+      setTags([...tags, tag]);
+    }
+  };
 
   return (
     <div className={styles.home_container}>
@@ -194,29 +203,38 @@ const Home = () => {
             <div className={styles.input_fields}>
               <div className={styles.tags_fields}>
                 <label htmlFor="tags">Tags <span className={styles.important}>*</span></label>
-                <input
+                <div
+                  className={styles.divv}
                   type="text"
                   id='tags'
                   name='tags'
-                  onFocus={() => { setIsTagOpen(true) }}
-                  onBlur={() => { setIsTagOpen(false) }}
-                />
+                  onClick={() => { setIsTagOpen(prev => !prev) }}
+                >
+                  {
+                    tags.length == 0 ? 'Click here to see options' :
+                      tags.map((tag, index) => {
+                        return (
+                          <span key={index}>{tag}</span>
+                        )
+                      })
+                  }
+                </div>
                 <div className={`${styles.tagoptions} ${isTagOpen ? styles.show_options : ''}`}>
-                  <div className={styles.tag_item}>Luxury</div>
-                  <div className={styles.tag_item}>Affordable</div>
-                  <div className={styles.tag_item}>New</div>
-                  <div className={styles.tag_item}>Under Construction</div>
-                  <div className={styles.tag_item}>Fully Furnished</div>
-                  <div className={styles.tag_item}>Pet Friendly</div>
-                  <div className={styles.tag_item}>Near School</div>
-                  <div className={styles.tag_item}>Near Metro</div>
-                  <div className={styles.tag_item}>Gated Community</div>
-                  <div className={styles.tag_item}>Eco-Friendly</div>
-                  <div className={styles.tag_item}>Smart Home</div>
-                  <div className={styles.tag_item}>Waterfront</div>
-                  <div className={styles.tag_item}>Mountain View</div>
-                  <div className={styles.tag_item}>Garden</div>
-                  <div className={styles.tag_item}>Swimming Pool</div>
+                  <div onClick={() => { handleTags('Luxury') }} className={styles.tag_item}>Luxury</div>
+                  <div onClick={() => { handleTags('Affordable') }} className={styles.tag_item}>Affordable</div>
+                  <div onClick={() => { handleTags('New') }} className={styles.tag_item}>New</div>
+                  <div onClick={() => { handleTags('Under Construction') }} className={styles.tag_item}>Under Construction</div>
+                  <div onClick={() => { handleTags('Fully Furnished<') }} className={styles.tag_item}>Fully Furnished</div>
+                  <div onClick={() => { handleTags('Pet Friendly') }} className={styles.tag_item}>Pet Friendly</div>
+                  <div onClick={() => { handleTags('Near School') }} className={styles.tag_item}>Near School</div>
+                  <div onClick={() => { handleTags('Near Metro') }} className={styles.tag_item}>Near Metro</div>
+                  <div onClick={() => { handleTags('Gated Community') }} className={styles.tag_item}>Gated Community</div>
+                  <div onClick={() => { handleTags('Eco-Friendly') }} className={styles.tag_item}>Eco-Friendly</div>
+                  <div onClick={() => { handleTags('Smart Home') }} className={styles.tag_item}>Smart Home</div>
+                  <div onClick={() => { handleTags('Waterfront') }} className={styles.tag_item}>Waterfront</div>
+                  <div onClick={() => { handleTags('Mountain View') }} className={styles.tag_item}>Mountain View</div>
+                  <div onClick={() => { handleTags('Garden') }} className={styles.tag_item}>Garden</div>
+                  <div onClick={() => { handleTags('Swimming Pool') }} className={styles.tag_item}>Swimming Pool</div>
                 </div>
               </div>
               <div className={styles.formik_error}>
