@@ -9,8 +9,8 @@
   background-color: $black;
   color: $white;
 
-  font-size: 48px;
-  font-weight: 700;
+  // font-size: 48px;
+  // font-weight: 700;
 
   .sidebar_content {
     min-height: calc(100vh - 78px);
@@ -22,6 +22,164 @@
     @include flex(row, flex-start, flex-start);
     width: 100%;
     height: 100%;
+    max-height: calc(100vh - 78px);
     overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      padding: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $secondary;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $active;
+      border-radius: 10px;
+      border: 3px solid $secondary;
+    }
+
+    .property_form {
+      padding: 25px;
+      min-width: 750px;
+      background-color: indigo;
+
+      form {
+        background: $secondary;
+
+        padding: 24px;
+
+        border: 1px solid $grey1;
+        border-radius: 8px;
+
+        @include flex(column, flex-start, flex-start);
+        gap: 10px;
+
+
+        .input_fields {
+          width: 100%;
+
+          .fields,
+          .tags_fields {
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+
+            input,
+            select,
+            textarea {
+              width: 100%;
+              padding: 6px 12px;
+              margin-bottom: 6px;
+
+              border: none;
+              outline: none;
+
+              border-bottom: 1px solid $grey4;
+              border-radius: 8px;
+
+              color: $grey4;
+              font-size: 16px;
+              line-height: 24px;
+              font-weight: 400;
+
+              background-color: $grey1;
+
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+            }
+
+            label {
+              font-size: 14px;
+              line-height: 22px;
+
+              margin-bottom: 6px;
+            }
+
+          }
+
+          .tags_fields {
+            position: relative;
+
+            .tagoptions {
+              display: none;
+              visibility: hidden;
+              overflow: auto;
+
+              &::-webkit-scrollbar {
+                width: 10px;
+                padding: 2px;
+              }
+
+              &::-webkit-scrollbar-track {
+                background: $grey1 ;
+                border-radius: 10px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background-color: $active;
+                border-radius: 10px;
+                border: 3px solid $grey1 ;
+              }
+
+              position: absolute;
+              top: 66px;
+
+              border: none;
+              outline: none;
+
+              border-bottom: 1px solid $grey4;
+              border-radius: 8px;
+
+              width: 100%;
+              height: 150px;
+
+              background: $grey1;
+
+              &.show_options {
+                display: block;
+                visibility: visible;
+              }
+
+              .tag_item {
+                padding: 6px 12px;
+
+                &:hover {
+                  background: $activebg;
+                  color: $active;
+                }
+              }
+            }
+          }
+
+
+
+
+
+          .formik_error {
+            display: flex;
+            gap: 5px;
+            min-height: 20px;
+            min-width: 100%;
+            color: $error;
+            font-size: 14px;
+
+            span {
+              @include flex(row, center, center)
+            }
+
+            @media screen and (max-width:475px) {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
   }
 }
