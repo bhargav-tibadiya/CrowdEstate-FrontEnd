@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar'
 import styles from './Home.module.scss'
+import { MdCloudUpload, MdError } from 'react-icons/md';
 
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import { MdError } from 'react-icons/md';
+
+import { useDropzone } from 'react-dropzone';
+import { imageUploadAPI } from '../../services/uploadApi';
+
+import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
+
+
+// Yup Validation Schema to validate each form field.
 
 const propertySchema = Yup.object().shape({
   name: Yup.string()
@@ -14,6 +23,10 @@ const propertySchema = Yup.object().shape({
   description: Yup.string()
     .trim()
     .required('Description is required'),
+
+  image: Yup.string()
+    .trim()
+    .required('Image is required'),
 
   price: Yup.number().
     required('Price is required'),
@@ -28,12 +41,6 @@ const propertySchema = Yup.object().shape({
 
   isCollaborative: Yup.boolean().
     required('Collaboration status is required'),
-
-  maxContributors: Yup.number()
-    .when('isCollaborative', {
-      is: true,
-      then: Yup.number().required('Max contributors are required')
-    }),
 
   address: Yup.string().
     required('Address is required'),
@@ -59,7 +66,7 @@ const propertySchema = Yup.object().shape({
 
   bathrooms: Yup.number(),
 
-  yearBuilt: Yup.number(),
+  builtYear: Yup.number(),
 });
 
 const Home = () => {
@@ -97,15 +104,62 @@ const Home = () => {
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = formik
+
+  // Effect to Fetch Current User Id from Cookie and Store it to Formik
+
+  useEffect(() => {
+    const userCookie = Cookies.get('user');  // Get the cookie named 'user'
+    if (userCookie) {
+      setFieldValue('listedBy', userCookie);  // Set the cookie value to 'listedBy' field in Formik
+    }
+  }, [setFieldValue]);
 
   const handleTags = (tag) => {
-    if (tags.includes(tag)) {
+    if (values.tags.includes(tag)) {
+      const updatedTags = values.tags.filter(t => t !== tag);
       setTags(tags.filter((t) => t !== tag));
+      setFieldValue('tags', updatedTags);
     } else {
       setTags([...tags, tag]);
+      setFieldValue('tags', [...values.tags, tag]);
     }
   };
+
+  // Image Uploading with React Dropzone Logic
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+
+    console.log("Inside On Drop");
+    const file = acceptedFiles[0];
+
+    if (!file) return;
+
+    console.log('file', file)
+
+    const formData = new FormData();
+    formData.append('imageFile', file);
+
+    const response = await imageUploadAPI(formData)
+
+    if (response.success) {
+      toast.success("Image Uploaded SucessFully")
+    } else {
+      toast.success("Image Uploaded Failed")
+    }
+
+    setFieldValue('image', response.imageUrl);
+
+  }, [setFieldValue]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/*': ['.jpeg', '.jpg', '.png', '.gif']
+    },
+    maxSize: 1048576, // 1MB in bytes
+    multiple: false
+  });
 
   return (
     <div className={styles.home_container}>
@@ -131,6 +185,7 @@ const Home = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
+                  placeholder='Ex. Divergent Villa'
                 />
               </div>
               <div className={styles.formik_error}>
@@ -148,6 +203,7 @@ const Home = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
+                  placeholder='Luxurious 4-bedroom villa with modern amenities, private pool, spacious garden, and stunning sea views. Located in an exclusive neighborhood, this home offers elegant interiors, a gourmet kitchen, and expansive outdoor spaces for ultimate relaxation.'
                 />
               </div>
               <div className={styles.formik_error}>
@@ -167,10 +223,40 @@ const Home = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
+                  placeholder='41,250,000'
                 />
               </div>
               <div className={styles.formik_error}>
                 {touched.price && errors.price ? <><span><MdError /> </span><span>{errors.price}</span></> : null}
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className={styles.input_fields}>
+              <div className={styles.fields}>
+                <label htmlFor="image">Image <span className={styles.important}>*</span></label>
+                <div
+                  {...getRootProps()}
+                  className={`${styles.fullWidth} ${styles.dropzone}`}
+                >
+                  <input {...getInputProps()} id="image" name="image" />
+                  <div className={styles.dropzone_content}>
+                    <MdCloudUpload size={24} />
+                    {isDragActive ? (
+                      <p>Drop the image here</p>
+                    ) : (
+                      <p>Drag & drop an image here, or click to select</p>
+                    )}
+                    {values.image && (
+                      <p className={styles.file_name}>{values.image.name}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className={styles.formik_error}>
+                {touched.image && errors.image ?
+                  <><span><MdError /> </span><span>{errors.image}</span></>
+                  : null}
               </div>
             </div>
 
@@ -244,43 +330,24 @@ const Home = () => {
 
             {/* Is Collaborative */}
             <div className={styles.input_fields}>
-              <div className={styles.fields}>
+              <div className={`${styles.fields} ${styles.colab_fields}`}>
                 <label htmlFor="isCollaborative">Is Collaborative? <span className={styles.important}>*</span></label>
-                <input
-                  type="checkbox"
+                <select
                   id="isCollaborative"
                   name="isCollaborative"
-                  checked={values.isCollaborative}
+                  value={values.isCollaborative}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
-                />
+                >
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
               </div>
               <div className={styles.formik_error}>
                 {touched.isCollaborative && errors.isCollaborative ? <><span><MdError /> </span><span>{errors.isCollaborative}</span></> : null}
               </div>
             </div>
-
-            {/* Max Contributors */}
-            {values.isCollaborative && (
-              <div className={styles.input_fields}>
-                <div className={styles.fields}>
-                  <label htmlFor="maxContributors">Max Contributors <span className={styles.important}>*</span></label>
-                  <input
-                    type="number"
-                    id="maxContributors"
-                    name="maxContributors"
-                    value={values.maxContributors}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.fullWidth}
-                  />
-                </div>
-                <div className={styles.formik_error}>
-                  {touched.maxContributors && errors.maxContributors ? <><span><MdError /> </span><span>{errors.maxContributors}</span></> : null}
-                </div>
-              </div>
-            )}
 
             {/* Location Fields */}
             <div className={styles.input_fields}>
@@ -294,6 +361,7 @@ const Home = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
+                  placeholder='5 Park Avenue'
                 />
               </div>
               <div className={styles.formik_error}>
@@ -301,95 +369,105 @@ const Home = () => {
               </div>
             </div>
 
-            <div className={styles.input_fields}>
-              <div className={styles.fields}>
-                <label htmlFor="city">City <span className={styles.important}>*</span></label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={values.city}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.fullWidth}
-                />
+            <div className={`${styles.input_fields} ${styles.address}`}>
+              <div className={styles.address_item}>
+                <div className={styles.fields}>
+                  <label htmlFor="city">City <span className={styles.important}>*</span></label>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={values.city}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='Surat'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.city && errors.city ? <><span><MdError /> </span><span>{errors.city}</span></> : null}
+                </div>
               </div>
-              <div className={styles.formik_error}>
-                {touched.city && errors.city ? <><span><MdError /> </span><span>{errors.city}</span></> : null}
-              </div>
-            </div>
 
-            <div className={styles.input_fields}>
-              <div className={styles.fields}>
-                <label htmlFor="state">State <span className={styles.important}>*</span></label>
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  value={values.state}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.fullWidth}
-                />
+              <div className={styles.address_item}>
+                <div className={styles.fields}>
+                  <label htmlFor="state">State <span className={styles.important}>*</span></label>
+                  <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    value={values.state}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='Gujarat'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.state && errors.state ? <><span><MdError /> </span><span>{errors.state}</span></> : null}
+                </div>
               </div>
-              <div className={styles.formik_error}>
-                {touched.state && errors.state ? <><span><MdError /> </span><span>{errors.state}</span></> : null}
-              </div>
-            </div>
 
-            <div className={styles.input_fields}>
-              <div className={styles.fields}>
-                <label htmlFor="country">Country <span className={styles.important}>*</span></label>
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  value={values.country}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.fullWidth}
-                />
-              </div>
-              <div className={styles.formik_error}>
-                {touched.country && errors.country ? <><span><MdError /> </span><span>{errors.country}</span></> : null}
+              <div className={styles.address_item}>
+                <div className={styles.fields}>
+                  <label htmlFor="country">Country <span className={styles.important}>*</span></label>
+                  <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    value={values.country}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='India'
+
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.country && errors.country ? <><span><MdError /> </span><span>{errors.country}</span></> : null}
+                </div>
               </div>
             </div>
 
             {/* Coordinates */}
-            <div className={styles.input_fields}>
-              <div className={styles.fields}>
-                <label htmlFor="coordinates.lat">Latitude <span className={styles.important}>*</span></label>
-                <input
-                  type="number"
-                  id="coordinates.lat"
-                  name="coordinates.lat"
-                  value={values.coordinates.lat}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.fullWidth}
-                />
+            <div className={`${styles.input_fields} ${styles.coordinates}`}>
+              <div className={styles.coordinates_item}>
+                <div className={styles.fields}>
+                  <label htmlFor="coordinates.lat">Latitude <span className={styles.important}>*</span></label>
+                  <input
+                    type="number"
+                    id="coordinates.lat"
+                    name="coordinates.lat"
+                    value={values.coordinates.lat}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='21.227341'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {(touched.coordinates?.lat && errors.coordinates?.lat) ? <><span><MdError /> </span><span>{errors.coordinates.lat}</span></> : null}
+                </div>
               </div>
-              <div className={styles.formik_error}>
-                {(touched.coordinates?.lat && errors.coordinates?.lat) ? <><span><MdError /> </span><span>{errors.coordinates.lat}</span></> : null}
+              <div className={styles.coordinates_item}>
+                <div className={styles.fields}>
+                  <label htmlFor="coordinates.lng">Longitude <span className={styles.important}>*</span></label>
+                  <input
+                    type="number"
+                    id="coordinates.lng"
+                    name="coordinates.lng"
+                    value={values.coordinates.lng}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='72.894547'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {(touched.coordinates?.lng && errors.coordinates?.lng) ? <><span><MdError /> </span><span>{errors.coordinates.lng}</span></> : null}
+                </div>
               </div>
-            </div>
 
-            <div className={styles.input_fields}>
-              <div className={styles.fields}>
-                <label htmlFor="coordinates.lng">Longitude <span className={styles.important}>*</span></label>
-                <input
-                  type="number"
-                  id="coordinates.lng"
-                  name="coordinates.lng"
-                  value={values.coordinates.lng}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.fullWidth}
-                />
-              </div>
-              <div className={styles.formik_error}>
-                {(touched.coordinates?.lng && errors.coordinates?.lng) ? <><span><MdError /> </span><span>{errors.coordinates.lng}</span></> : null}
-              </div>
             </div>
 
             {/* Size */}
@@ -404,6 +482,7 @@ const Home = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.fullWidth}
+                  placeholder='4250 SQ. FT'
                 />
               </div>
               <div className={styles.formik_error}>
@@ -411,15 +490,67 @@ const Home = () => {
               </div>
             </div>
 
+            <div className={`${styles.input_fields} ${styles.info}`}>
+              <div className={styles.info_info}>
+                <div className={styles.fields}>
+                  <label htmlFor="bedrooms">Bedrooms<span className={styles.important}>*</span></label>
+                  <input
+                    type="number"
+                    id="bedrooms"
+                    name="bedrooms"
+                    value={values.bedrooms}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='4'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.bedrooms && errors.bedrooms ? <><span><MdError /> </span><span>{errors.bedrooms}</span></> : null}
+                </div>
+              </div>
 
+              <div className={styles.info_info}>
+                <div className={styles.fields}>
+                  <label htmlFor="bathrooms">Bathrooms <span className={styles.important}>*</span></label>
+                  <input
+                    type="number"
+                    id="bathrooms"
+                    name="bathrooms"
+                    value={values.bathrooms}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='3'
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.bathrooms && errors.bathrooms ? <><span><MdError /> </span><span>{errors.bathrooms}</span></> : null}
+                </div>
+              </div>
 
+              <div className={styles.info_info}>
+                <div className={styles.fields}>
+                  <label htmlFor="yearBuilt">Years Built<span className={styles.important}>*</span></label>
+                  <input
+                    type="number"
+                    id="yearBuilt"
+                    name="yearBuilt"
+                    value={values.yearBuilt}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.fullWidth}
+                    placeholder='2021'
 
+                  />
+                </div>
+                <div className={styles.formik_error}>
+                  {touched.yearBuilt && errors.yearBuilt ? <><span><MdError /> </span><span>{errors.yearBuilt}</span></> : null}
+                </div>
+              </div>
+            </div>
 
-
-
-
-
-            <div className={styles.button_signup}>
+            <div className={styles.submit_btn}>
               <button type="submit">Submit Property</button>
             </div>
           </form>
@@ -427,6 +558,23 @@ const Home = () => {
         </div>
 
         <div className={styles.instructions}>
+          <div className={styles.propertyTips}>
+            <p>Property Listing Tips</p>
+            <ul>
+              <li>Set the <strong>Property Price</strong> or specify if it's negotiable in the <em>price</em> field.</li>
+              <li><strong>Standard image size</strong> for the property thumbnail is <em>1024x576</em>.</li>
+              <li>Use the <em>description</em> field to provide a detailed overview of the property, including key selling points.</li>
+              <li>The <em>category</em> field helps organize listings (e.g., Residential, Commercial, Luxury).</li>
+              <li>Add relevant <strong>tags</strong> to make the property easily searchable (e.g., Luxury, Near Metro, Gated Community).</li>
+              <li>In the <em>isCollaborative</em> field, indicate if the property is available for collaborative purchasing or shared ownership.</li>
+              <li>Provide the maximum number of contributors in the <em>maxContributors</em> field for collaborative purchases.</li>
+              <li>Use the <em>address</em>, <em>city</em>, <em>state</em>, and <em>country</em> fields to ensure the property's location is accurate.</li>
+              <li>Fill out the <em>coordinates (lat, lng)</em> fields to pinpoint the property on the map.</li>
+              <li>Use the <em>size</em>, <em>bedrooms</em>, <em>bathrooms</em>, and <em>yearBuilt</em> fields to specify the property's details and construction year.</li>
+              <li>Ensure the <em>listedBy</em> field is correctly filled with your user information to identify the seller or agent.</li>
+              <li><strong>Update regularly:</strong> If any changes occur, such as price adjustments or new features, update the listing promptly.</li>
+            </ul>
+          </div>
 
         </div>
 
