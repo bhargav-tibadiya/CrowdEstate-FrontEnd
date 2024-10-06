@@ -17,6 +17,7 @@ import { imageUploadAPI } from '../../services/uploadApi';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { MdCloudUpload, MdError } from 'react-icons/md';
+import { addPropertyAPI } from '../../services/propertyApi';
 
 
 
@@ -109,8 +110,36 @@ const AddProperty = () => {
 
     onSubmit: (values) => {
       console.log('Property Submitted: ', values);
+
+      handleAddProperty(values);
+
+      formik.resetForm( )
     },
   });
+
+  const handleAddProperty = async (payload) => {
+    try {
+
+      const result = await addPropertyAPI(payload);
+
+      console.log('result', result)
+      if (result.success === true) {
+
+        toast.success('Property Added Successfuly')
+
+      } else {
+        toast.error(result.message)
+      }
+
+
+    } catch (error) {
+
+      console.log('Error While Adding property\n Check AddProperty.jsx #FE007', error);
+      console.log('Reason :', error?.response?.data?.message)
+      throw error
+
+    }
+  }
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = formik
 
