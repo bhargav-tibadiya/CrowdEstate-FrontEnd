@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')).render(
     <GoogleOAuthProvider clientId={googleClientId}>
       <BrowserRouter>
         <Analytics />
-        <SpeedInsights />
+        <SpeedInsights /> 
         <App />
       </BrowserRouter>
     </GoogleOAuthProvider>

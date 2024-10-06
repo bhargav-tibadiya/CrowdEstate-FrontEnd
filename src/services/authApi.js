@@ -19,6 +19,10 @@ export const loginAPI = async (payload) => {
       Cookies.set('token', response.data.token, cookieConfig);
     }
 
+    if (response.data.user) {
+      Cookies.set('user', response.data.user._id, cookieConfig);
+    }
+
     return response.data;
 
   } catch (error) {

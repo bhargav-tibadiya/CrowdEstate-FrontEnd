@@ -1,0 +1,62 @@
+@import '../../style/_constant.scss';
+
+.sidebar_container {
+  @include flex(column, flex-start, space-between);
+
+  font-family: satoshi;
+  font-weight: 400;
+  color: $grey4;
+
+  // gap: 50px;
+  height: 100%;
+  width: 250px;
+  padding: 30px 0;
+
+  background: $secondary;
+  font-size: 12px;
+
+  .pages_section,
+  .property_section,
+  .user_controls {
+    @include flex(column, flex-start, flex-start);
+    width: 100%;
+
+    .sidebar_item {
+      @include flex(row, center, flex-start);
+      box-sizing: border-box;
+
+      width: 100%;
+      gap: 12px;
+      padding: 8px 24px;
+
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 500;
+      border-left: 2px solid transparent;
+
+      cursor: pointer;
+
+
+      &.active {
+        border-left: 2px solid $active;
+        background: $activebg;
+        color: $active;
+      }
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+
+  .devider {
+    box-sizing: border-box;
+
+    width: calc(100% - 32px);
+    height: 1px;
+    margin: 14px 16px;
+    background: $grey3;
+    border-radius: 10px;
+  }
+}

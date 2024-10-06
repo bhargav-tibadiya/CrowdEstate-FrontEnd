@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route element={<Wrapper />}>
 
-          <Route path={routes.test} element={<OTP />} />
+          <Route path={routes.test} element={<Home />} />
 
           <Route element={<LSWrapper />}>
             <Route path={routes.login} element={<Login />} />
