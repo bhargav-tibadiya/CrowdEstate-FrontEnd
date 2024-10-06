@@ -6,11 +6,11 @@ import './App.scss'
 import Wrapper from './layout/wrapper/wrapper'
 import Home from './pages/home/Home'
 import Login from './pages/Login/Login'
-import OTP from './components/otp/OTP'
 import Signup from './pages/Signup/Signup'
 import { Toaster } from 'react-hot-toast'
 import AuthWrapper from './layout/wrapper/AuthWrapper'
 import LSWrapper from './layout/wrapper/LSWrapper'
+import AddProperty from './pages/AddProperty/AddProperty'
 
 function App() {
   return (
@@ -25,17 +25,25 @@ function App() {
 
           <Route path={routes.test} element={<Home />} />
 
+          {/* It Will Check if Token is available and Valid to Bypass Auth */}
           <Route element={<LSWrapper />}>
             <Route path={routes.login} element={<Login />} />
             <Route path={routes.signup} element={<Signup />} />
           </Route>
 
           <Route element={<AuthWrapper />}>
+
+            {/* Normal Paths */}
             <Route path={routes.default} element={<Home />} />
             <Route path={routes.home} element={<Home />} />
             <Route path={routes.app} element={<Home />} />
             <Route path={routes.about} element={<Home />} />
             <Route path={routes.contact} element={<Home />} />
+
+            {/* Sidebar Menu Paths */}
+            <Route path={routes.addproperty} element={<AddProperty />} />
+
+            {/* Not Found Path */}
             <Route path='*' element={<Home />} />
           </Route>
 
