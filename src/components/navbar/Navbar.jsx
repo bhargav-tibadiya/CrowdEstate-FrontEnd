@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import styles from "./Navbar.module.scss"
 import { routes } from "../../config/routes";
 import { useState } from "react";
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
 
@@ -32,10 +33,27 @@ const Navbar = () => {
       <div className={styles.website_other_icon}>
         <div className={styles.search_icon}><FaSearch /></div>
         {
-          location.pathname == '/login' ?
+          location.pathname === '/login' && (
             <button onClick={() => navigate(routes.signup)}>Sign up</button>
-            :
+          )
+        }
+
+        {
+          location.pathname === '/signup' && (
             <button onClick={() => navigate(routes.login)}>Login</button>
+          )
+        }
+
+        {
+          location.pathname !== '/login' && location.pathname !== '/signup' && (
+            <button onClick={() => {
+              // Remove the token cookie
+              Cookies.remove('token');
+
+              // Navigate to the login page
+              navigate(routes.login);
+            }}>Logout</button>
+          )
         }
       </div>
 
@@ -50,11 +68,29 @@ const Navbar = () => {
             <div className={`${styles.nav_items} ${selectedMenu == 1 ? styles.active : ""}`} onClick={() => { navigate(routes.app), SetSelectedMenu(1) }}> <span>App </span><FaAngleDown /></div>
             <div className={`${styles.nav_items} ${selectedMenu == 2 ? styles.active : ""}`} onClick={() => { navigate(routes.about), SetSelectedMenu(2) }}>About us</div>
             <div className={`${styles.nav_items} ${selectedMenu == 3 ? styles.active : ""}`} onClick={() => { navigate(routes.contact), SetSelectedMenu(3) }}>Contact us</div>
+
             {
-              location.pathname == '/login' ?
+              location.pathname === '/login' && (
                 <button onClick={() => navigate(routes.signup)}>Sign up</button>
-                :
+              )
+            }
+
+            {
+              location.pathname === '/signup' && (
                 <button onClick={() => navigate(routes.login)}>Login</button>
+              )
+            }
+
+            {
+              location.pathname !== '/login' && location.pathname !== '/signup' && (
+                <button onClick={() => {
+                  // Remove the token cookie
+                  Cookies.remove('token');
+
+                  // Navigate to the login page
+                  navigate(routes.login);
+                }}>Logout</button>
+              )
             }
           </div>
         }
