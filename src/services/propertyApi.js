@@ -19,3 +19,21 @@ export const addPropertyAPI = async (payload) => {
 
   }
 };
+
+export const showAllPropertiesOfUser = async (payload) => {
+  try {
+
+    const response = await axios.post(`${API_URL}/property/showproperties`, payload, {
+      withCredentials: true,
+    });
+
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Adding Property \n Check propertyAPI #FE008', error);
+    console.log('Reason:', error?.response?.data?.message);
+    throw error.response?.data || error;
+
+  }
+};

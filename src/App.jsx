@@ -11,8 +11,10 @@ import { Toaster } from 'react-hot-toast'
 import AuthWrapper from './layout/wrapper/AuthWrapper'
 import LSWrapper from './layout/wrapper/LSWrapper'
 import AddProperty from './pages/AddProperty/AddProperty'
+import Properties from './pages/Properties/Properties'
 
 function App() {
+
   return (
     <div className='app_container'>
       <Toaster toastOptions={{
@@ -42,6 +44,7 @@ function App() {
 
             {/* Sidebar Menu Paths */}
             <Route path={routes.addproperty} element={<AddProperty />} />
+            <Route path={routes.properties} element={<Properties />} />
 
             {/* Not Found Path */}
             <Route path='*' element={<Home />} />
