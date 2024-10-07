@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 
-const AuthWrapper = () => {
+const LSWrapper = () => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
@@ -24,24 +24,20 @@ const AuthWrapper = () => {
           setIsAuthenticated(false);
 
           // Remove the expired token
-          console.log('Cookies Removed')
           Cookies.remove('token');
-          console.log("Invalid Token ");
-          navigate('/login')
+          console.log('Cookies Removed')
+          console.log("Invalid Token LS");
 
         } else if (!decoded) {
 
-          console.log("Token not found");
-          navigate('/login')
+          console.log("Token not found LS");
 
         } else {
 
           setIsAuthenticated(true);
-          console.log("Token Verified");
+          console.log("Token Verified LS");
+          navigate('/');
 
-          if (location.pathname === '/login' || location.pathname === '/signup') {
-            navigate('/');
-          }
         }
       } catch (error) {
 
@@ -54,17 +50,12 @@ const AuthWrapper = () => {
     } else {
 
       setIsAuthenticated(false);
-      console.log("Token not found");
-      navigate('/login')
+      console.log("Token not found LS");
 
     }
   }, [navigate]);
 
-  if (isAuthenticated === null) {
-    return <div>Loading...</div>;
-  }
-
-  return isAuthenticated ? <Outlet /> : null;
+  return !isAuthenticated && <Outlet/> ;
 };
 
-export default AuthWrapper;
+export default LSWrapper;

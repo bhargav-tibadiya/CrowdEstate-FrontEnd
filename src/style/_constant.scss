@@ -3,15 +3,19 @@ $white : #ffffff;
 $blue : #47A5C5;
 
 $color1 : #0f0f0f;
+
 $active : #FFD60A;
+$activebg : #3D2A01;
 
 $primary : #000814;
 $secondary : #161D29;
 
 $grey1 : #2C333F;
 $grey2 : #AFB2BF;
+$grey3 : #424854;
+$grey4 : #838894;
 
-$error:#EF476F;
+$error: #EF476F;
 
 @mixin flex ($direction, $align, $justify) {
   display: flex;
@@ -24,7 +28,6 @@ $error:#EF476F;
   margin: 0;
   padding: 0;
 }
-
 
 @mixin occupyFullSpace() {
   width: 100%;

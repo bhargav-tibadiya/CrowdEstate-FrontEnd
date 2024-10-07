@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import styles from './OTP.module.scss'
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GrPowerReset } from "react-icons/gr";
+import toast from 'react-hot-toast';
+import { otpAPI } from '../../services/authApi';
 
 const OTP = ({ formik, setIsOtpModalOpen }) => {
 
@@ -27,6 +29,20 @@ const OTP = ({ formik, setIsOtpModalOpen }) => {
       inputRefs.current[index + 1].focus();
     }
   };
+
+  const handleResendOTP = async () => {
+    
+    const payload = {
+      email: formik.values.email,
+    }
+
+    const result = await toast.promise(otpAPI(payload), {
+      loading: 'Sending OTP...',
+      success: 'OTP sent successfully!',
+      error: 'Failed to send OTP',
+    })
+    console.log("Login API Result", result);
+  }
 
 
   const handleKeyDown = (event, index) => {
@@ -60,7 +76,7 @@ const OTP = ({ formik, setIsOtpModalOpen }) => {
         </div>
         <div className={styles.actions} >
           <div className={styles.back} onClick={() => { setIsOtpModalOpen(false), window.scrollTo(0, 0) }}> <IoMdArrowRoundBack /> <span>Back to Sign Up</span> </div>
-          <div className={styles.resend}><GrPowerReset /> <span>Resend Email</span> </div>
+          <div className={styles.resend} onClick={handleResendOTP} ><GrPowerReset /> <span>Resend Email</span> </div>
         </div>
       </div>
 
