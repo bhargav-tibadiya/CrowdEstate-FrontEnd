@@ -105,8 +105,8 @@ const Property = () => {
             <div className={styles.main_title}>
               <div className={styles.que}>General Information</div>
               <div className={styles.extra_icons_button}>
-                <button><FaHeart size={18} /> Save</button>
-                <button><FaShare size={18} /> Share</button>
+                <button><FaHeart size={16} /> Save</button>
+                <button><FaShare size={16} /> Share</button>
               </div>
             </div>
 
@@ -122,15 +122,15 @@ const Property = () => {
 
             <div className={styles.properties_extra_features}>
               <div className={styles.properties_things}>
-                <div className={styles.icons}><FaBed size={30} color="#161D29" /></div>
+                <div className={styles.icons}><FaBed size={20} color="#161D29" /></div>
                 <div className={styles.que}>Bedroom</div>
               </div>
               <div className={styles.properties_things}>
-                <div className={styles.icons}><FaSink size={30} color="#161D29" /></div>
+                <div className={styles.icons}><FaSink size={20} color="#161D29" /></div>
                 <div className={styles.que}>Bathroom</div>
               </div>
               <div className={styles.properties_things}>
-                <div className={styles.icons}><FaSquarespace size={30} color="#161D29" /></div>
+                <div className={styles.icons}><FaSquarespace size={20} color="#161D29" /></div>
                 <div className={styles.que}>Sqft</div>
               </div>
             </div>
@@ -165,7 +165,7 @@ const Property = () => {
                   Amenities.map((ele, index) => {
                     return (
                       <div className={styles.properties_things} key={index}>
-                        <div className={styles.icons}><ele.icons size={30} color="#161D29" /></div>
+                        <div className={styles.icons}><ele.icons size={20} color="#161D29" /></div>
                         <div className={styles.propertise_que}>{ele.things}</div>
                       </div>
                     )
