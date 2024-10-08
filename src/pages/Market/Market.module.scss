@@ -1,0 +1,119 @@
+@import '../../style/_constant.scss';
+
+.market_container {
+  @include occupyFullSpace();
+  @include flex(row, flex-start, flex-start);
+  min-height: calc(100vh - 78px);
+  max-height: calc(100vh - 78px);
+
+  background-color: $primary;
+  color: $white;
+
+  // font-size: 48px;
+  // font-weight: 700;
+
+  .sidebar_content {
+    min-height: calc(100vh - 78px);
+    background: $secondary;
+  }
+
+
+  .market_content {
+    @include flex(column, flex-start, flex-start);
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 78px);
+    overflow: auto;
+    padding: 24px;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      padding: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $secondary;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $active;
+      border-radius: 10px;
+      border: 3px solid $secondary;
+    }
+
+    // TODO there might be a search bar in future
+
+    .property_container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 35px;
+      padding: 20px;
+      width: 100%;
+
+
+      .property {
+        @include flex(column, flex-start, space-between);
+        width: 100%;
+        overflow: hidden;
+
+        border-radius: 8px;
+        background-color: $secondary;
+
+        .image {
+          @include flex(column, center, center);
+          width: 100%;
+          height: 100%;
+
+          border: 1px solid $grey1;
+          border-radius: 8px;
+          padding: 4px;
+
+          background-color: $secondary;
+
+          img {
+            border-radius: 4px;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .description {
+          @include flex(row, center, space-between);
+          width: 100%;
+
+          padding: 8px 16px;
+
+          .info {
+            @include flex(column, flex-start, flex-start);
+            width: 100%;
+
+            .price {
+              font-size: 32px;
+              font-family: Edu SA Beginner;
+              color: $active;
+            }
+
+            .name {
+              font-size: 16px;
+            }
+          }
+
+          .button {
+            @include flex(column, center, center);
+            min-width: 40px;
+            min-height: 40px;
+            border-radius: 8px;
+
+            font-size: 24px;
+
+            background-color: $active;
+            color: $black;
+
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
