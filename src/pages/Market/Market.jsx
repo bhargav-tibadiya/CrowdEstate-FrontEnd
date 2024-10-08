@@ -66,6 +66,9 @@ const Market = () => {
               )
             })
           }
+
+          {/* //! Delete this */}
+
           <div className={styles.property}>
             <div className={styles.image}>
               <img src="https://res.cloudinary.com/bhargavspace/image/upload/v1728225132/CrowdEstate/ta9shqclrvj0zw59zrx4.jpg" alt="" />

@@ -1,0 +1,391 @@
+@import "../../style/_constant.scss";
+
+.property_container {
+  @include occupyFullSpace();
+  @include flex(row, flex-start, flex-start);
+  min-height: calc(100vh - 78px);
+  max-height: calc(100vh - 78px);
+
+  background-color: $primary;
+  color: $white;
+
+
+  .sidebar_content {
+    min-height: calc(100vh - 78px);
+    background: $secondary;
+  }
+
+  .propertices_content {
+    @include flex(column, flex-start, flex-start);
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    max-height: calc(100vh - 78px);
+    overflow: auto;
+    gap: 60px;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      padding: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $secondary;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $active;
+      border-radius: 10px;
+      border: 3px solid $secondary;
+    }
+
+    .first_part {
+      @include flex(row, flex-start, flex-start);
+      gap: 58px;
+
+      .propertices_image {
+        img {
+          border-radius: 15px;
+          min-width: 900px;
+          max-height: 534px;
+          border-bottom: 1px solid $grey4;
+        }
+      }
+
+      .propertices_details {
+        background-color: $secondary;
+        border-radius: 15px;
+        max-width: 540px;
+        max-height: 600px;
+        padding: 30px;
+        border-bottom: 1px solid $grey4;
+
+        .propertices_name {
+          font-size: 24px;
+          font-weight: 400;
+          padding-bottom: 10px;
+        }
+
+        .devider {
+          box-sizing: border-box;
+
+          width: 100%;
+          height: 1px;
+          background: $grey1;
+          border-radius: 10px;
+        }
+
+        .propertices_price {
+          padding: 10px 0;
+
+          .que {
+            font-size: 16px;
+            color: $grey2;
+          }
+
+          .ans {
+            font-size: 20px;
+
+            span {
+              font-size: 16px;
+              color: $grey4;
+            }
+          }
+        }
+
+        .propertices_Owner {
+          padding: 10px 0;
+
+          .que {
+            font-size: 16px;
+            color: $grey2;
+          }
+
+          .ans {
+            @include flex(row, center, space-between);
+            gap: 30px;
+
+            .owner_image {
+              min-width: 50px;
+              min-height: 50px;
+              background-color: $white;
+              border-radius: 10px;
+            }
+
+            .owner_details {
+              width: 100%;
+              // padding: 0 30px;
+              @include flex(column, flex-start, flex-start);
+              gap: 6px;
+
+              .owner_name {
+                font-size: 18px;
+                font-weight: 400;
+              }
+
+              .owner_investor_type {
+                font-size: 16px;
+                color: $grey4;
+              }
+            }
+
+            .Right_arrow_button {
+              @include flex(row, center, center);
+              min-width: 30px;
+              min-height: 30px;
+              color: $secondary;
+              background: $active;
+              text-align: center;
+              border-radius: 10px;
+            }
+          }
+        }
+
+        .properties_extra_details {
+          padding: 10px 0;
+
+          .que {
+            font-size: 18px;
+            font-weight: 400;
+            padding-bottom: 10px;
+          }
+
+          .ans {
+            font-size: 16px;
+            color: $grey4;
+          }
+        }
+
+        .properties_leave_button {
+          button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: #FFD60A;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+
+    .second_part {
+      @include flex(row, flex-start, flex-start);
+      gap: 58px;
+
+      .general_information {
+        min-width: 900px;
+        min-height: 100vh;
+
+        .main_title {
+          @include flex(row, center, space-between);
+
+          .que {
+            font-size: 22px;
+            font-weight: 500px;
+            line-height: auto;
+          }
+
+          .extra_icons_button {
+            @include flex(row, center, center);
+            gap: 20px;
+
+            button {
+              border: 0;
+              outline: 0;
+              background: $active;
+              color: $secondary;
+              padding: 10px 20px;
+              border-radius: 8px;
+              font-size: 16px;
+              font-weight: 600;
+              text-align: center;
+            }
+          }
+        }
+
+        .main_title_ans {
+          max-width: 600px;
+          padding: 47px 0;
+
+          p {
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+
+        .properties_extra_features {
+          @include flex(row, flex-start, flex-start);
+          gap: 25px;
+          padding: 25px 0;
+
+          .properties_things {
+            @include flex(row, center, space-between);
+
+            .icons {
+              @include flex(row, center, center);
+              min-width: 32px;
+              min-height: 32px;
+              background: $active;
+              border-radius: 8px;
+            }
+
+            .que {
+              padding-left: 15px;
+              font-size: 18px;
+              font-weight: 400;
+            }
+          }
+        }
+
+        .devider {
+          box-sizing: border-box;
+
+          width: 100%;
+          height: 1px;
+          background: $grey1;
+          border-radius: 10px;
+        }
+
+        .details_of_properties {
+          padding: 25px 0;
+
+          .que {
+            font-size: 22px;
+            font-weight: 400;
+          }
+
+          .ans {
+            @include flex(column, flex-start, flex-start);
+            gap: 30px;
+            padding-top: 25px;
+
+            .properties_things {
+              @include flex(row, flex-start, space-between);
+              min-width: 350px;
+
+              color: $white;
+              overflow: hidden;
+
+              border-radius: 8px;
+
+              border: 1px solid $secondary;
+
+              .queOfThings {
+                width: 50%;
+                padding: 15px;
+                font-size: 18px;
+                background-color: $grey1;
+              }
+
+              .ansOfThings {
+                padding: 15px;
+                font-size: 18px;
+                font-weight: bold;
+              }
+
+            }
+          }
+        }
+
+        .propertise_amenities {
+          padding-top: 64px;
+
+          .que {
+            font-size: 22px;
+            font-weight: 500;
+          }
+
+          .ans {
+            padding-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px 15px;
+
+            .properties_things {
+              @include flex(row, center, flex-start);
+
+              .icons {
+                @include flex(row, center, center);
+                min-width: 32px;
+                min-height: 32px;
+                background: $active;
+                border-radius: 50%;
+
+                color: $black;
+              }
+
+              .propertise_que {
+                padding-left: 15px;
+                font-size: 18px;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+
+      .properties_address {
+        background-color: $secondary;
+        border-radius: 15px;
+        min-width: 540px;
+        max-height: 600px;
+        padding: 30px;
+        border-bottom: 1px solid $grey4;
+
+        .properties_address_que {
+          font-size: 22px;
+          font-weight: 400;
+          padding-bottom: 10px;
+        }
+
+        .devider {
+          box-sizing: border-box;
+          width: 100%;
+          height: 1px;
+          background: $grey1;
+          border-radius: 10px;
+        }
+
+        .property_add_box {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          padding: 10px 0;
+
+          .properties_address1 {
+
+            .que {
+              font-size: 16px;
+              color: $grey2;
+            }
+
+            .ans {
+              font-size: 20px;
+            }
+          }
+        }
+
+        .properties_address_button {
+
+          button {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: #FFD60A;
+            border-radius: 8px;
+          }
+        }
+
+      }
+    }
+  }
+}
