@@ -1,0 +1,210 @@
+@import '../../style/_constant.scss';
+
+.properties_container {
+  @include occupyFullSpace();
+  @include flex(row, flex-start, flex-start);
+  min-height: calc(100vh - 78px);
+  max-height: calc(100vh - 78px);
+
+  background-color: $primary;
+  color: $white;
+
+  // font-size: 48px;
+  // font-weight: 700;
+
+  .sidebar_content {
+    min-height: calc(100vh - 78px);
+    background: $secondary;
+  }
+
+
+  .properties_content {
+    @include flex(row, flex-start, flex-start);
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 78px);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      padding: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $secondary;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $active;
+      border-radius: 10px;
+      border: 3px solid $secondary;
+    }
+
+    .properties_list {
+      @include flex(column, flex-start, flex-start);
+
+      width: 100%;
+      max-width: 1400px;
+
+      margin: 24px;
+      border-radius: 8px;
+
+      border: 1px solid $secondary;
+
+      .list_head {
+        @include flex(row, flex-start, flex-start);
+        width: 100%;
+        color: $grey2;
+        text-transform: uppercase;
+        border-bottom: 1px solid $secondary;
+        padding: 16px;
+
+        .left {
+          width: 100%;
+        }
+
+        .right {
+          min-width: 450px;
+        }
+      }
+
+      .list_items {
+        @include flex(column, flex-start, flex-start);
+        width: 100%;
+
+        .list_item {
+          @include flex(row, center, flex-start);
+          width: 100%;
+          padding: 16px;
+
+          border-bottom: 1px solid $secondary;
+
+          &:nth-last-child(1) {
+            border: none;
+          }
+
+          .left {
+            @include flex(row, flex-start, flex-start);
+
+            width: 100%;
+            // background-color: aquamarine;
+            gap: 24px;
+
+            .image {
+              @include flex(row, center, center);
+
+
+              min-width: 250px;
+              max-width: 250px;
+              max-height: 180px;
+
+              border-radius: 8px;
+
+              overflow: hidden;
+
+              object-fit: fill;
+
+              img {
+                max-width: 250px;
+              }
+            }
+
+            .info {
+              @include flex(column, flex-start, flex-start);
+
+              width: 100%;
+              gap: 12px;
+
+              .name {
+                font-size: 20px;
+                line-height: 28px;
+                color: $white;
+              }
+
+              .desc {
+                font-size: 14px;
+                line-height: 22px;
+                color: $grey2;
+              }
+
+              .date {
+                font-size: 12px;
+                line-height: 20px;
+                color: $white;
+              }
+
+              .status {
+                @include flex(row, center, center);
+
+                gap: 6px;
+                padding: 4px 8px;
+                border-radius: 22px;
+
+                color: $active;
+
+                background-color: $grey1;
+
+                font-size: 12px;
+                line-height: 20px;
+              }
+            }
+
+          }
+
+          .right {
+            @include flex(row, center, center);
+            min-width: 450px;
+
+            height: 100%;
+            border: 1px solid $secondary;
+            border-radius: 8px;
+            overflow: hidden;
+            // padding: 8px;
+            // gap: 8px;
+
+            .parta,
+            .partb {
+              @include flex(column, flex-start, flex-start);
+              width: 100%;
+
+              .info_item {
+                @include flex(row, flex-start, flex-start);
+
+                border-bottom: 1px solid $secondary;
+                width: 100%;
+
+                &:nth-last-child(1) {
+                  border: none;
+                }
+
+                .que,
+                .ans {
+                  padding: 4px 12px;
+                  width: 100%;
+
+                }
+
+                .que {
+                  background-color: $grey1;
+                }
+              }
+            }
+
+            .parta {
+              // background-color: cadetblue;
+              border-right: 1px solid $secondary;
+            }
+
+            .partb {
+              // background-color: darkturquoise;
+            }
+
+          }
+
+        }
+      }
+
+    }
+  }
+}

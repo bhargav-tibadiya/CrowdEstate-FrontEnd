@@ -12,6 +12,7 @@ export const routes = {
 
   addproperty: '/addproperty',
   properties: '/properties',
+  indivisual:"/indivisual",
 
   profile: '/profile',
   settings: '/settings',
