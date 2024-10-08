@@ -64,8 +64,7 @@
         .propertices_name {
           font-size: 24px;
           font-weight: 400;
-          line-height: 80%;
-          padding-bottom: 20px;
+          padding-bottom: 10px;
         }
 
         .devider {
@@ -73,23 +72,20 @@
 
           width: 100%;
           height: 1px;
-          background: $grey2;
+          background: $grey1;
           border-radius: 10px;
         }
 
         .propertices_price {
-          padding: 20px 0;
+          padding: 10px 0;
 
           .que {
             font-size: 16px;
-            line-height: 80%;
             color: $grey2;
-            padding-bottom: 15px;
           }
 
           .ans {
             font-size: 20px;
-            line-height: 80%;
 
             span {
               font-size: 16px;
@@ -99,13 +95,11 @@
         }
 
         .propertices_Owner {
-          padding: 20px 0;
+          padding: 10px 0;
 
           .que {
             font-size: 16px;
-            line-height: 80%;
             color: $grey2;
-            padding-bottom: 15px;
           }
 
           .ans {
@@ -123,17 +117,15 @@
               width: 100%;
               // padding: 0 30px;
               @include flex(column, flex-start, flex-start);
-              gap: 10px;
+              gap: 6px;
 
               .owner_name {
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: 400;
-                line-height: 80%;
               }
 
               .owner_investor_type {
                 font-size: 16px;
-                line-height: 80%;
                 color: $grey4;
               }
             }
@@ -151,18 +143,16 @@
         }
 
         .properties_extra_details {
-          padding: 20px 0;
+          padding: 10px 0;
 
           .que {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 400;
-            line-height: 80%;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
           }
 
           .ans {
-            font-size:16px;
-            line-height: 80%;
+            font-size: 16px;
             color: $grey4;
           }
         }
@@ -195,7 +185,7 @@
           @include flex(row, center, space-between);
 
           .que {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 500px;
             line-height: auto;
           }
@@ -231,7 +221,7 @@
         .properties_extra_features {
           @include flex(row, flex-start, flex-start);
           gap: 25px;
-          padding-bottom: 70px;
+          padding: 25px 0;
 
           .properties_things {
             @include flex(row, center, space-between);
@@ -257,41 +247,47 @@
 
           width: 100%;
           height: 1px;
-          background: $grey2;
+          background: $grey1;
           border-radius: 10px;
         }
 
         .details_of_properties {
-          padding-top: 60px;
+          padding: 25px 0;
 
           .que {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
           }
 
           .ans {
-            @include flex(row, flex-start, flex-start);
+            @include flex(column, flex-start, flex-start);
             gap: 30px;
-            padding-top: 40px;
+            padding-top: 25px;
 
             .properties_things {
-              min-width: 120px;
-              min-height: 60px;
-              background: $white;
-              color: $black;
+              @include flex(row, flex-start, space-between);
+              min-width: 350px;
+
+              color: $white;
+              overflow: hidden;
+
               border-radius: 8px;
-              padding: 15px;
+
+              border: 1px solid $secondary;
+
+              .queOfThings {
+                width: 50%;
+                padding: 15px;
+                font-size: 18px;
+                background-color: $grey1;
+              }
 
               .ansOfThings {
-                font-size: 20px;
+                padding: 15px;
+                font-size: 18px;
                 font-weight: bold;
               }
 
-              .queOfThings {
-                font-size: 20px;
-                font-weight: 500;
-                padding-top: 13px;
-              }
             }
           }
         }
@@ -308,7 +304,7 @@
             padding-top: 50px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 60px 20px;
+            gap: 35px 15px;
 
             .properties_things {
               @include flex(row, center, flex-start);
@@ -319,6 +315,8 @@
                 min-height: 32px;
                 background: $active;
                 border-radius: 50%;
+
+                color: $black;
               }
 
               .propertise_que {
@@ -340,38 +338,39 @@
         border-bottom: 1px solid $grey4;
 
         .properties_address_que {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: 400;
-          line-height: 80%;
-          padding-bottom: 20px;
+          padding-bottom: 10px;
         }
 
         .devider {
           box-sizing: border-box;
           width: 100%;
           height: 1px;
-          background: $grey2;
+          background: $grey1;
           border-radius: 10px;
         }
 
-        .properties_address1 {
+        .property_add_box {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
           padding: 10px 0;
 
-          .que {
-            font-size: 16px;
-            line-height: 80%;
-            color: $grey2;
-            padding-bottom: 10px;
-          }
+          .properties_address1 {
 
-          .ans {
-            font-size: 20px;
-            line-height: 80%;
+            .que {
+              font-size: 16px;
+              color: $grey2;
+            }
+
+            .ans {
+              font-size: 20px;
+            }
           }
         }
 
         .properties_address_button {
-          padding-top: 20px;
 
           button {
             width: 100%;

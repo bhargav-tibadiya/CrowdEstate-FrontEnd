@@ -49,8 +49,6 @@ function App() {
             {/* Sidebar Menu Paths */}
             <Route path={routes.addproperty} element={<AddProperty />} />
             <Route path={routes.properties} element={<Properties />} />
-
-
             <Route path={routes.property} element={<Property />} />
             <Route path={routes.market} element={<Market />} />
 

@@ -1,48 +1,31 @@
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./Property.module.scss"
 import image1 from "../../../public/asset/images/property/img1.jpg"
-import { FaAngleRight, FaBed, FaFan, FaHeart, FaHouseUser, FaParking, FaShare, FaSignal, FaSink, FaSoap, FaSquarespace, FaTree, FaWater, FaWifi } from "react-icons/fa"
+import { FaAngleRight, FaBed, FaFan, FaHeart, FaHouseUser, FaParking, FaShare, FaSignal, FaSink, FaSoap, FaSquarespace, FaWifi } from "react-icons/fa"
+
+import { FaCheckCircle, FaCaretRight, FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'
 
 const Property = () => {
-  const Amenities = [
-    {
-      icons: FaWifi,
-      things: "Wifi"
-    },
-    {
-      icons: FaHouseUser,
-      things: "Workspace"
-    },
-    {
-      icons: FaParking,
-      things: "Car Parking"
-    },
-    {
-      icons: FaTree,
-      things: "Backyard"
-    },
-    {
-      icons: FaBed,
-      things: "Refrigenerator"
-    },
-    {
-      icons: FaSoap,
-      things: "Washer"
-    },
-    {
-      icons: FaFan,
-      things: "Air Conditioner"
-    },
-    {
-      icons: FaWater,
-      things: "Swimmingpool"
-    },
-    {
-      icons: FaSignal,
-      things: "Others"
-    },
+  const allAmenities = {
+    "Luxury": <FaCrown />,
+    "Affordable": <FaDollarSign />,
+    "New": <FaClock />,
+    "Under Construction": <FaHammer />,
+    "Fully Furnished": <FaCouch />,
+    "Pet Friendly": <FaDog />,
+    "Near School": <FaSchool />,
+    "Near Metro": <FaSubway />,
+    "Gated Community": <FaLock />,
+    "Eco-Friendly": <FaLeaf />,
+    "Smart Home": <FaMobileAlt />,
+    "Waterfront": <FaWater />,
+    "Mountain View": <FaMountain />,
+    "City Center": <FaCity />,
+    "Garden": <FaTree />,
+    "Swimming Pool": <FaSwimmingPool />
+  };
 
-  ]
+  const apiTags = ['Waterfront', 'Garden', 'Near Metro', 'Swimming Pool']
 
   return (
     <div className={styles.property_container}>
@@ -104,34 +87,12 @@ const Property = () => {
           <div className={styles.general_information}>
             <div className={styles.main_title}>
               <div className={styles.que}>General Information</div>
-              <div className={styles.extra_icons_button}>
-                <button><FaHeart size={16} /> Save</button>
-                <button><FaShare size={16} /> Share</button>
-              </div>
-            </div>
-
-            <div className={styles.main_title_ans}>
-              <p>This web platform includes features like property search,
-                an interactive map, virtual tours, agent communication,
-                booking viewings, mortgage calculators, and property listings.
-                <br />
-                The color palette is a neutral black and white scheme,
-                providing a clean backdrop that highlights property photos.
-                This minimalist approach ensures the focus remains on the listed options.</p>
             </div>
 
             <div className={styles.properties_extra_features}>
               <div className={styles.properties_things}>
-                <div className={styles.icons}><FaBed size={20} color="#161D29" /></div>
-                <div className={styles.que}>Bedroom</div>
-              </div>
-              <div className={styles.properties_things}>
-                <div className={styles.icons}><FaSink size={20} color="#161D29" /></div>
-                <div className={styles.que}>Bathroom</div>
-              </div>
-              <div className={styles.properties_things}>
                 <div className={styles.icons}><FaSquarespace size={20} color="#161D29" /></div>
-                <div className={styles.que}>Sqft</div>
+                <div className={styles.que}>Status / Category</div>
               </div>
             </div>
 
@@ -142,35 +103,38 @@ const Property = () => {
               <div className={styles.ans}>
 
                 <div className={styles.properties_things}>
-                  <div className={styles.ansOfThings}>5</div>
                   <div className={styles.queOfThings}>Bedroom</div>
+                  <div className={styles.ansOfThings}>5</div>
                 </div>
                 <div className={styles.properties_things}>
-                  <div className={styles.ansOfThings}>3</div>
                   <div className={styles.queOfThings}>Bathroom</div>
+                  <div className={styles.ansOfThings}>3</div>
                 </div>
                 <div className={styles.properties_things}>
-                  <div className={styles.ansOfThings}>1500</div>
                   <div className={styles.queOfThings}>Sqft</div>
+                  <div className={styles.ansOfThings}>1500</div>
                 </div>
 
               </div>
             </div>
+
+            <div className={styles.devider}></div>
 
             <div className={styles.propertise_amenities}>
               <div className={styles.que}>Amenities</div>
               <div className={styles.ans}>
 
                 {
-                  Amenities.map((ele, index) => {
-                    return (
+                  Object.keys(allAmenities)
+                    .filter(key => apiTags.includes(key))
+                    .map((key, index) => (
                       <div className={styles.properties_things} key={index}>
-                        <div className={styles.icons}><ele.icons size={20} color="#161D29" /></div>
-                        <div className={styles.propertise_que}>{ele.things}</div>
+                        <div className={styles.icons}>{allAmenities[key]}</div>
+                        <div className={styles.propertise_que}>{key}</div>
                       </div>
-                    )
-                  })
+                    ))
                 }
+
               </div>
             </div>
 
@@ -181,33 +145,30 @@ const Property = () => {
 
             <div className={styles.devider}></div>
 
-            <div className={styles.properties_address1}>
-              <div className={styles.que}>Address Line 1</div>
-              <div className={styles.ans}>Block no-2 12, Balaji Society </div>
-            </div>
-
-            <div className={styles.properties_address1}>
-              <div className={styles.que}>Address Line 2</div>
-              <div className={styles.ans}>kathodara gam, kamrej</div>
+            <div className={styles.property_add_box}>
+              <div className={styles.properties_address1}>
+                <div className={styles.que}>Address Line 1</div>
+                <div className={styles.ans}>Block no-2 12, Balaji Society </div>
+              </div>
             </div>
 
 
             <div className={styles.devider}></div>
 
-            <div className={styles.properties_address1}>
-              <div className={styles.que}>City</div>
-              <div className={styles.ans}>Surat</div>
+            <div className={styles.property_add_box}>
+              <div className={styles.properties_address1}>
+                <div className={styles.que}>City</div>
+                <div className={styles.ans}>Surat</div>
+              </div>
+              <div className={styles.properties_address1}>
+                <div className={styles.que}>State</div>
+                <div className={styles.ans}>Gujarat</div>
+              </div>
+              <div className={styles.properties_address1}>
+                <div className={styles.que}>Country</div>
+                <div className={styles.ans}>India</div>
+              </div>
             </div>
-            <div className={styles.properties_address1}>
-              <div className={styles.que}>State</div>
-              <div className={styles.ans}>Gujarat</div>
-            </div>
-            <div className={styles.properties_address1}>
-              <div className={styles.que}>Country</div>
-              <div className={styles.ans}>India</div>
-            </div>
-
-            <div className={styles.devider}></div>
 
             <div className={styles.properties_address_button}>
               <button>View on Google Map</button>
