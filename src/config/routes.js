@@ -12,6 +12,7 @@ export const routes = {
 
   addproperty: '/addproperty',
   properties: '/properties',
+  market: '/marketplace',
 
   profile: '/profile',
   settings: '/settings',

@@ -3,7 +3,7 @@ import styles from './Sidebar.module.scss'
 
 
 // --> Importing Assets <--
-import { TbLayoutDashboard, LiaUser, PiBuildings, IoSettingsOutline, HiOutlineBuildingOffice2 } from '../../assets/icons'
+import { TbLayoutDashboard, LiaUser, PiBuildings, IoSettingsOutline, HiOutlineBuildingOffice2, BsShop } from '../../assets/icons'
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -32,6 +32,15 @@ const Sidebar = () => {
           <span>Test</span>
         </div>
 
+      </div>
+
+      <div className={styles.devider}></div>
+
+      <div className={styles.market_section}>
+        <div onClick={() => navigate('/marketplace')} className={`${styles.sidebar_item} ${(location.pathname == '/marketplace') ? styles.active : null}`}>
+          <BsShop />
+          <span>MarketPlace</span>
+        </div>
       </div>
 
       <div className={styles.devider}></div>
