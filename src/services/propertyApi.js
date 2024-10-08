@@ -37,3 +37,21 @@ export const showAllPropertiesOfUser = async (payload) => {
 
   }
 };
+
+export const fetchAllProperties = async () => {
+  try {
+
+    const response = await axios.post(`${API_URL}/property/fetchallproperties`, {
+      withCredentials: true,
+    });
+
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Fetching All Property \n Check propertyAPI #FE008=9', error);
+    console.log('Reason:', error?.response?.data?.message);
+    throw error.response?.data || error;
+
+  }
+};
