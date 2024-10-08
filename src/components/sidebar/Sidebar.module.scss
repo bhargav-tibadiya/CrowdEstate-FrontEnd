@@ -16,6 +16,7 @@
   font-size: 12px;
 
   .pages_section,
+  .market_section,
   .property_section,
   .user_controls {
     @include flex(column, flex-start, flex-start);
