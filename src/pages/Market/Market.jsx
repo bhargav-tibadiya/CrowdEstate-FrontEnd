@@ -7,6 +7,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import styles from './Market.module.scss'
 import { FaCaretRight } from '../../assets/icons'
 import { fetchAllProperties } from '../../services/propertyApi'
+import Filter from '../../components/Filter/Filter'
 
 
 
@@ -33,6 +34,36 @@ const Market = () => {
 
   }, [])
 
+  const [filteredProperties, setFilteredProperties] = useState(data);
+
+  const handleFilterChange = (filters) => {
+    const { location, estateType, priceRange, beds, sqftRange, extraFeatures } = filters;
+
+    // Handle empty or undefined priceRange and sqftRange
+    const [minPrice, maxPrice] = priceRange ? priceRange.split('-').map(Number) : [0, Infinity];
+    const [minSqft, maxSqft] = sqftRange ? sqftRange.split('-').map(Number) : [0, Infinity];
+
+    const filtered = data.filter((property) => {
+      // Check if the property has all selected extra features
+      const hasFeatures = extraFeatures.every((feature) =>
+        property.features.includes(feature)
+      );
+
+      return (
+        (!location || property.location.toLowerCase().includes(location.toLowerCase())) &&
+        (!estateType || property.estateType === estateType) &&
+        (!priceRange || (property.price >= (minPrice || 0) && property.price <= (maxPrice || Infinity))) &&
+        (!beds || property.beds >= beds) &&
+        (!sqftRange || (property.sqft >= (minSqft || 0) && property.sqft <= (maxSqft || Infinity))) &&
+        (!extraFeatures.length || hasFeatures) // Only apply feature filter if features are selected
+      );
+    });
+
+    setFilteredProperties(filtered);
+  };
+
+  console.log(filteredProperties)
+
   console.log('data', data)
 
 
@@ -44,10 +75,15 @@ const Market = () => {
       </div>
 
       <div className={styles.market_content}>
+
+        <div className={styles.filter_container}>
+          <Filter onFilterChange={handleFilterChange} />
+        </div>
+
         <div className={styles.property_container}>
 
           {
-            data.map((item, index) => {
+            filteredProperties.map((item, index) => {
               return (
                 <div key={index} className={styles.property}>
                   <div className={styles.image}>
@@ -83,11 +119,14 @@ const Market = () => {
               </div>
             </div>
           </div>
+          
+          
 
         </div>
       </div>
     </div>
   )
 }
+
 
 export default Market

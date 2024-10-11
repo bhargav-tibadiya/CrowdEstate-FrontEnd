@@ -1,4 +1,4 @@
-@import '../../style/_constant.scss';
+@import "../../style/_constant.scss";
 
 .market_container {
   @include occupyFullSpace();
@@ -16,7 +16,6 @@
     min-height: calc(100vh - 78px);
     background: $secondary;
   }
-
 
   .market_content {
     @include flex(column, flex-start, flex-start);
@@ -43,14 +42,13 @@
     }
 
     // TODO there might be a search bar in future
-
+    
     .property_container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 35px;
       padding: 20px;
       width: 100%;
-
 
       .property {
         @include flex(column, flex-start, space-between);
