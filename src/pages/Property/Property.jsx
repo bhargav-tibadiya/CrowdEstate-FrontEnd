@@ -1,9 +1,9 @@
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./Property.module.scss"
 import image1 from "../../../public/asset/images/property/img1.jpg"
-import { FaAngleRight, FaBed, FaFan, FaHeart, FaHouseUser, FaParking, FaShare, FaSignal, FaSink, FaSoap, FaSquarespace, FaWifi } from "react-icons/fa"
+import { FaAngleRight, FaSquarespace} from "react-icons/fa"
 
-import { FaCheckCircle, FaCaretRight, FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'
+import { FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'
 
 const Property = () => {
   const allAmenities = {
