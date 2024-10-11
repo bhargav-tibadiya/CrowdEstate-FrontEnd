@@ -12,7 +12,10 @@ import AuthWrapper from './layout/wrapper/AuthWrapper'
 import LSWrapper from './layout/wrapper/LSWrapper'
 import AddProperty from './pages/AddProperty/AddProperty'
 import Properties from './pages/Properties/Properties'
+
 import Market from './pages/Market/Market'
+import Property from './pages/Property/Property'
+
 
 function App() {
 
