@@ -105,12 +105,16 @@
           .ans {
             @include flex(row, center, space-between);
             gap: 30px;
-
+            
             .owner_image {
+              @include flex(row, center, center);
               min-width: 50px;
               min-height: 50px;
-              background-color: $white;
+
+              max-width: 50px;
+              max-height: 50px;
               border-radius: 10px;
+              overflow: hidden;
             }
 
             .owner_details {

@@ -1,5 +1,6 @@
 // Importing hooks
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 // Importing Components and Styling
@@ -9,8 +10,9 @@ import { FaCaretRight } from '../../assets/icons'
 import { fetchAllProperties } from '../../services/propertyApi'
 
 
-
 const Market = () => {
+
+  const navigate = useNavigate()
 
   const [data, setData] = useState([]);
 
@@ -58,7 +60,7 @@ const Market = () => {
                       <span className={styles.price}>{item.price}</span>
                       <span className={styles.name}>{item.name}, {item.city}</span>
                     </div>
-                    <div onClick={() => { }} className={styles.button}>
+                    <div onClick={() => { navigate(`/property/${item._id}`) }} className={styles.button}>
                       <FaCaretRight />
                     </div>
                   </div>
@@ -66,23 +68,6 @@ const Market = () => {
               )
             })
           }
-
-          {/* //! Delete this */}
-
-          <div className={styles.property}>
-            <div className={styles.image}>
-              <img src="https://res.cloudinary.com/bhargavspace/image/upload/v1728225132/CrowdEstate/ta9shqclrvj0zw59zrx4.jpg" alt="" />
-            </div>
-            <div className={styles.description}>
-              <div className={styles.info}>
-                <span className={styles.price}>12,000,000</span>
-                <span className={styles.name}>Greenfield Colony, Bengaluru</span>
-              </div>
-              <div onClick={() => { }} className={styles.button}>
-                <FaCaretRight />
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>

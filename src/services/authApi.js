@@ -68,3 +68,20 @@ export const signupAPI = async (payload) => {
 
   }
 }
+
+export const findUser = async (payload) => {
+  try {
+
+    const response = await axios.post(`${API_URL}/auth/getuser`, payload, {
+      withCredentials: true
+    });
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Login\n Check authAPi #FE012F', error);
+    console.log('Reason :', error?.response?.data?.message)
+    return error.response.data
+
+  }
+}
