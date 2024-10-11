@@ -7,24 +7,18 @@ const Filter = ({ onFilterChange }) => {
     const [priceRange, setPriceRange] = useState('');
     const [beds, setBeds] = useState('');
     const [sqft, setSqft] = useState('');
-    const [extraFeatures, setExtraFeatures] = useState([]);
+    const [category, setCategory] = useState('');
 
-
-    const handleExtraFeaturesChange = (e) => {
-        const selectedFeatures = Array.from(e.target.selectedOptions, option => option.value);
-        setExtraFeatures(selectedFeatures);
-    };
-
-    useEffect(()=>{
+    useEffect(() => {
         onFilterChange({
             location,
             estateType,
             priceRange,
             beds,
             sqft,
-            extraFeatures, // Now this contains multiple selected features
+            category,
         });
-    }, [location, estateType, priceRange, beds, sqft, extraFeatures])
+    }, [location, estateType, priceRange, beds, sqft, category])
 
     return (
         <div className={styles.filter_container}>
@@ -74,7 +68,7 @@ const Filter = ({ onFilterChange }) => {
                         value={priceRange}
                         onChange={(e) => setPriceRange(e.target.value)}
                     >
-                        
+
                         <option value="0-100000">Under ₹100,000</option>
                         <option value="100000-300000">₹100,000 - ₹300,000</option>
                         <option value="300000-500000">₹300,000 - ₹500,000</option>
@@ -126,18 +120,19 @@ const Filter = ({ onFilterChange }) => {
             {/* Sqft Range */}
             <div className={styles.input_fields}>
                 <div className={styles.fields}>
-                    <label htmlFor="Extra-type">Extra Type</label>
+                    <label htmlFor="Category">Category</label>
                     <select
-                        id="Extra-type"
-                        name="Extra-type"
-                        value={extraFeatures}
-                        onChange={handleExtraFeaturesChange}
+                        id="Category"
+                        name="Category"
+                        value={category}
+                        onChange={(e)=>{setCategory(e.target.value)}}
                     >
-                        <option value="furniture">Furniture</option>
-                        <option value="sofa">Sofa</option>
-                        <option value="garage">Garage</option>
-                        <option value="pool">Pool</option>
-                        <option value="garden">Garden</option>
+                        <option value="">Select a category</option>
+                        <option value="Available">Available</option>
+                        <option value="Sold">Sold</option>
+                        <option value="Under Offer">Under Offer</option>
+                        <option value="Rented">Rented</option>
+                        <option value="Off Market">Off Market</option>
 
                     </select>
                 </div>

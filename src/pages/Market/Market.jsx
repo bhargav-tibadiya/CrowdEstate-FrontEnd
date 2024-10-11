@@ -14,6 +14,7 @@ import Filter from '../../components/Filter/Filter'
 const Market = () => {
 
   const [data, setData] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
 
   useEffect(() => {
 
@@ -34,37 +35,38 @@ const Market = () => {
 
   }, [])
 
-  const [filteredProperties, setFilteredProperties] = useState(data);
+
+ 
 
   const handleFilterChange = (filters) => {
-    const { location, estateType, priceRange, beds, sqftRange, extraFeatures } = filters;
+    const { location, priceRange, beds, sqft, category } = filters;
 
     // Handle empty or undefined priceRange and sqftRange
     const [minPrice, maxPrice] = priceRange ? priceRange.split('-').map(Number) : [0, Infinity];
-    const [minSqft, maxSqft] = sqftRange ? sqftRange.split('-').map(Number) : [0, Infinity];
+    const [minSqft, maxSqft] = sqft ? sqft.split('-').map(Number) : [0, Infinity];
 
     const filtered = data.filter((property) => {
-      // Check if the property has all selected extra features
-      const hasFeatures = extraFeatures.every((feature) =>
-        property.features.includes(feature)
-      );
+
+      const propertyLocation = `${property.location.city} ${property.location.state} ${property.location.country}`.toLowerCase();
+      const propertyPrice = property.price;
+      const propertySqft = property.size;
+      const propertyBeds = property.bedrooms;
+      const propertyCategory = property.category;
 
       return (
-        (!location || property.location.toLowerCase().includes(location.toLowerCase())) &&
-        (!estateType || property.estateType === estateType) &&
-        (!priceRange || (property.price >= (minPrice || 0) && property.price <= (maxPrice || Infinity))) &&
-        (!beds || property.beds >= beds) &&
-        (!sqftRange || (property.sqft >= (minSqft || 0) && property.sqft <= (maxSqft || Infinity))) &&
-        (!extraFeatures.length || hasFeatures) // Only apply feature filter if features are selected
+        (!location || propertyLocation.includes(location.toLowerCase())) &&
+        (!priceRange || (propertyPrice >= (minPrice || 0) && propertyPrice <= (maxPrice || Infinity))) &&
+        (!beds || propertyBeds == beds) &&
+        (!sqft || (propertySqft >= (minSqft || 0) && propertySqft <= (maxSqft || Infinity))) &&
+        (!category || propertyCategory == category)
       );
     });
 
-    setFilteredProperties(filtered);
+    setFilteredProperties(filtered)
+    // console.log(filteredProperties)
   };
 
-  console.log(filteredProperties)
-
-  console.log('data', data)
+  console.log('data', filteredProperties)
 
 
   return (
@@ -83,7 +85,8 @@ const Market = () => {
         <div className={styles.property_container}>
 
           {
-            filteredProperties.map((item, index) => {
+            
+            (filteredProperties.length > 0 ? filteredProperties:data).map((item, index) => {
               return (
                 <div key={index} className={styles.property}>
                   <div className={styles.image}>
@@ -119,8 +122,8 @@ const Market = () => {
               </div>
             </div>
           </div>
-          
-          
+
+
 
         </div>
       </div>
