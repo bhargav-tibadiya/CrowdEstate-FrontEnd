@@ -77,3 +77,23 @@ export const getProperty = async (id) => {
 
   }
 };
+
+export const changeOwner = async (propertyId, newOwnerId) => {
+  try {
+    const payload = {
+      propertyId: propertyId,
+      newOwnerId: newOwnerId,
+    };
+
+    const response = await axios.post(`${API_URL}/property/changeowner`, payload, {
+      withCredentials: true,
+    });
+
+    return response.data;
+
+  } catch (error) {
+    console.log('Error While Changing Property Owner \n Check propertyAPI #FE0015', error);
+    console.log('Reason:', error?.response?.data?.message);
+    throw error.response?.data || error;
+  }
+};
