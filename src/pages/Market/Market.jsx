@@ -53,14 +53,14 @@ const Market = () => {
               return (
                 <div key={index} className={styles.property}>
                   <div className={styles.image}>
-                    <img src={item.image} alt="" />
+                    <img src={item?.image} alt="" />
                   </div>
                   <div className={styles.description}>
                     <div className={styles.info}>
-                      <span className={styles.price}>{item.price}</span>
-                      <span className={styles.name}>{item.name}, {item.city}</span>
+                      <span className={styles.price}>{item?.price}</span>
+                      <span className={styles.name}>{item?.name}, {item?.location?.city}</span>
                     </div>
-                    <div onClick={() => { navigate(`/property/${item._id}`) }} className={styles.button}>
+                    <div onClick={() => { navigate(`/property/${item?._id}`) }} className={styles.button}>
                       <FaCaretRight />
                     </div>
                   </div>

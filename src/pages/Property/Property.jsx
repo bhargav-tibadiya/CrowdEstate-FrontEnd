@@ -1,12 +1,16 @@
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./Property.module.scss"
-import { FaAngleRight, FaSquarespace } from "react-icons/fa"
 
+import { FaAngleRight, FaSquarespace } from "react-icons/fa"
 import { FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+
 import { getProperty } from "../../services/propertyApi"
 import { findUser } from "../../services/authApi"
+import { addTransaction, buyPropertyAPI } from '../../services/purchaseApi';
+
+import { toast } from 'react-hot-toast';
 
 
 const allAmenities = {
@@ -81,6 +85,48 @@ const Property = () => {
   console.log('data', data)
   console.log('userData', userData)
 
+  const handlePurchase = async (amount) => {
+    try {
+
+      const response = await buyPropertyAPI({ amount: amount });
+
+      const { id: order_id, currency, amount: order_amount } = response.response;
+
+      const options = {
+        key: import.meta.env.VITE_RZP_KEY_ID,
+        amount: order_amount,
+        currency: currency,
+        name: "Crowd Estate",
+        description: "Property Purchase",
+        order_id: order_id,
+        handler: async function (response) {
+
+          const payload = { ...response, amount: amount, userId: userData._id, propertyId: data._id }
+          const response2 = await addTransaction(payload)
+
+          toast.success('Payment Successful! 🎉');
+
+        },
+        prefill: {
+          name: "Crowd Estate",
+          email: "buyer@example.com",
+          contact: "9876543210",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      // Step 4: Open Razorpay Checkout
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+
+    } catch (error) {
+      console.error('Error during purchase:', error);
+      toast.error('Payment Failed. Please try again.');
+    }
+  };
+
 
   return (
     <div className={styles.property_container}>
@@ -135,7 +181,7 @@ const Property = () => {
             </div>
 
             <div className={styles.properties_leave_button}>
-              <button>Leave A Proposal</button>
+              <button onClick={() => handlePurchase(data?.price)}>Buy Now</button>
             </div>
           </div>
         </div>
