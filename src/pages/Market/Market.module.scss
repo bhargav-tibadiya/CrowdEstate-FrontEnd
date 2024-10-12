@@ -1,4 +1,4 @@
-@import '../../style/_constant.scss';
+@import "../../style/_constant.scss";
 
 .market_container {
   @include occupyFullSpace();
@@ -16,7 +16,6 @@
     min-height: calc(100vh - 78px);
     background: $secondary;
   }
-
 
   .market_content {
     @include flex(column, flex-start, flex-start);
@@ -50,7 +49,6 @@
       gap: 35px;
       padding: 20px;
       width: 100%;
-
 
       .property {
         @include flex(column, flex-start, space-between);
@@ -114,6 +112,12 @@
           }
         }
       }
+    }
+    .not_property{
+      @include flex(row, center, center);
+      height: 100vh;
+      margin: auto;
+      font-size: 20px;
     }
   }
 }

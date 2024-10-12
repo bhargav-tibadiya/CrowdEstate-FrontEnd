@@ -1,5 +1,6 @@
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./Property.module.scss"
+
 import { FaAngleRight, FaSquarespace } from "react-icons/fa"
 
 import { FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'

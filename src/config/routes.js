@@ -12,7 +12,6 @@ export const routes = {
 
   addproperty: '/addproperty',
   properties: '/properties',
-  indivisual:"/indivisual",
 
   property: "/property",
   market: '/marketplace',

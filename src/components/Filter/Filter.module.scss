@@ -1,0 +1,51 @@
+@import "../../style/_constant.scss";
+
+.filter_container {
+    @include flex(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    gap:25px;
+    
+
+    .input_fields {
+      min-width: 269px;
+
+      .fields {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input,
+        select {
+          width: 100%;
+          padding: 6px 12px;
+          margin-bottom: 6px;
+
+          border: none;
+          outline: none;
+
+          border-bottom: 1px solid $grey4;
+          border-radius: 8px;
+
+          color: $white;
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: 400;
+
+          background-color: $grey1;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .beds{
+      min-width: 100px;
+    }
+  }
