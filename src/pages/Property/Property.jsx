@@ -1,13 +1,14 @@
 import Sidebar from "../../components/sidebar/Sidebar"
 import styles from "./Property.module.scss"
 
+import Cookies from 'js-cookie';
 
 import { FaAngleRight, FaSquarespace } from "react-icons/fa"
 import { FaCrown, FaDollarSign, FaClock, FaHammer, FaCouch, FaDog, FaSchool, FaSubway, FaLock, FaLeaf, FaMobileAlt, FaWater, FaMountain, FaCity, FaTree, FaSwimmingPool } from '../../assets/icons'
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
-import { getProperty } from "../../services/propertyApi"
+import { changeOwner, getProperty } from "../../services/propertyApi"
 import { findUser } from "../../services/authApi"
 import { addTransaction, buyPropertyAPI } from '../../services/purchaseApi';
 
@@ -95,15 +96,18 @@ const Property = () => {
 
       const options = {
         key: import.meta.env.VITE_RZP_KEY_ID,
-        amount: order_amount,
+        amount: order_amount * 100,
         currency: currency,
         name: "Crowd Estate",
         description: "Property Purchase",
         order_id: order_id,
         handler: async function (response) {
 
+          const userId = Cookies.get('user');
+
           const payload = { ...response, amount: amount, userId: userData._id, propertyId: data._id }
           const response2 = await addTransaction(payload)
+          const response3 = await changeOwner(data._id, userId)
 
           toast.success('Payment Successful! 🎉');
 
