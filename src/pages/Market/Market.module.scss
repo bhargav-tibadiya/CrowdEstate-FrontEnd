@@ -42,7 +42,7 @@
     }
 
     // TODO there might be a search bar in future
-    
+
     .property_container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -112,6 +112,12 @@
           }
         }
       }
+    }
+    .not_property{
+      @include flex(row, center, center);
+      height: 100vh;
+      margin: auto;
+      font-size: 20px;
     }
   }
 }
