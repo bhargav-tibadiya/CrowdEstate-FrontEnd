@@ -13,9 +13,9 @@ export const aggregateTransactionsByMonth = (transactions) => {
 
     // Populate the monthly totals with transaction data
     transactions.forEach((txn) => {
-        const date = new Date(txn.listedAt);
+        const date = new Date(txn.createdAt);
         const month = date.toLocaleString('default', { month: 'short' }); // Get month name
-        const amount = txn.price;
+        const amount = txn.amount;
 
         // Add the transaction amount to the corresponding month
         if (monthlyTotals[month] !== undefined) {
@@ -41,12 +41,13 @@ export const aggregateTransactionsByYear = (transactions) => {
 
     // Populate the monthly totals with transaction data
     transactions.forEach((txn) => {
-        const date = txn.yearBuilt;
-        const amount = txn.price;
-
+        const date = new Date(txn.createdAt);
+        const monthYear = date.toLocaleString('default',{year: 'numeric'});
+        const amount = txn.amount;
+        
         // Add the transaction amount to the corresponding month
-        if (yearTotals[date] !== undefined) {
-            yearTotals[date] += amount;
+        if (yearTotals[monthYear] !== undefined) {
+            yearTotals[monthYear] += amount;
         }
     });
 
