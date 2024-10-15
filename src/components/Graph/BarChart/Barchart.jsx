@@ -22,10 +22,11 @@ const BarChart = ({ labels, amounts}) => {
                 datasets: [{
                     label:"Recent Transaction",
                     data: amounts,
-                    backgroundColor:'#2C333F',
+                    backgroundColor:'#838894',
                     hoverBackgroundColor:"#FFD60A",
                     borderWidth: 1,
                     borderRadius:30,
+                    
                 }]
             },
             
