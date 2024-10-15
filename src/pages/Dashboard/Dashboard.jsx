@@ -15,8 +15,9 @@ const Dashboard = () => {
   const [propertyData, setPropertyData] = useState([]);
   const [transactionData, setTransactionData] = useState([]);
   const [userData, setUserData] = useState([]);
-  
-  const [transaction, setTransaction] = useState("month")
+
+  const [transaction, setTransaction] = useState("month");
+  const [selectedMonth, setSelectedMonth] = useState('All');
 
   useEffect(() => {
 
@@ -49,45 +50,68 @@ const Dashboard = () => {
   console.log('userData', userData)
 
 
-
-  const monthlyData = aggregateTransactionsByMonth(propertyData);
-  const YearlyData = aggregateTransactionsByYear(propertyData);
+  //transaction barchart 
+  const monthlyData = aggregateTransactionsByMonth(transactionData);
+  const YearlyData = aggregateTransactionsByYear(transactionData);
   const labels = Object.keys(transaction === "month" ? monthlyData : YearlyData);
   const amounts = Object.values(transaction === "month" ? monthlyData : YearlyData);
 
-  const categoryCounts = propertyData.reduce((ele, property) => {
-    ele[property.category] = (ele[property.category] || 0) + 1;
-    return ele;
-  }, {});
+  //category piechart
+  const getMonthName = (dateString) => {
+    const date = new Date(dateString);
+    const monthNames = date.toLocaleString('default', { month: 'short' });;
+    return monthNames;
+};
 
-  const chartData = Object.values(categoryCounts);
-  const chartLabels = Object.keys(categoryCounts);
+
+// Filter data based on selected month
+const filteredData = selectedMonth === 'All' 
+    ? propertyData 
+    : propertyData.filter(item => getMonthName(item.listedAt) === selectedMonth);
+
+// Count properties by category for the selected month
+const categoryCounts = filteredData.reduce((acc, property) => {
+  acc[property.category] = (acc[property.category] || 0) + 1;
+  return acc;
+}, {});
+
+
+const chartData = Object.values(categoryCounts);
+const chartLabels = Object.keys(categoryCounts);
+
+console.log(chartData)
+  //totalIncome calculate
+  const totalIncome = propertyData.reduce((acc, curr) => acc + curr.price, 0);
+
+  //total recent transaction calculate
+  const totalTransaction = transactionData.reduce((acc, curr) => acc + curr.amount, 0);
+
 
   const user_property = [
     {
       title: "Total Property",
-      title_ans: "100",
+      title_ans: propertyData.length,
       predication_status: "up",
-      predication_value: 25,
+      predication_value: (12 / 15) * 100,
       title_icon: <FaCity />
     },
     {
       title: "Total Income",
-      title_ans: "$500",
+      title_ans: `₹ ${totalIncome}`,
       predication_status: "up",
       predication_value: 45,
       title_icon: <FaDollarSign />
     },
     {
       title: "Total User",
-      title_ans: "15",
+      title_ans: userData.length,
       predication_status: "down",
-      predication_value: 15,
+      predication_value: (userData.length / 10) * 100,
       title_icon: <FaUser />
     },
     {
       title: "Recent Transaction",
-      title_ans: "$5800",
+      title_ans: `₹ ${totalTransaction}`,
       predication_status: "down",
       predication_value: 25,
       title_icon: <FaMoneyBillWave />
@@ -127,24 +151,30 @@ const Dashboard = () => {
             <div className={styles.main_listed_title}>
               <div className={styles.que}>Category Analytics</div>
               <div className={styles.ans}>
-                <select name="date" id="date">
-                  <option value="jan">January</option>
-                  <option value="feb">February</option>
-                  <option value="mar">March</option>
-                  <option value="apr">April</option>
-                  <option value="may">May</option>
-                  <option value="jun">June</option>
-                  <option value="july">July</option>
-                  <option value="ayg">Aguest</option>
-                  <option value="sep">September</option>
-                  <option value="oct">Octomber</option>
-                  <option value="nov">November</option>
-                  <option value="dec">December</option>
+                <select 
+                name="date" 
+                id="date"
+                value={selectedMonth}
+                onChange={(e)=>setSelectedMonth(e.target.value)}
+                > 
+                  <option value="All">All</option>
+                  <option value="Jan">January</option>
+                  <option value="Feb">February</option>
+                  <option value="Mar">March</option>
+                  <option value="Apr">April</option>
+                  <option value="May">May</option>
+                  <option value="Jun">June</option>
+                  <option value="July">July</option>
+                  <option value="Aug">Aguest</option>
+                  <option value="Sep">September</option>
+                  <option value="Oct">Octomber</option>
+                  <option value="Nov">November</option>
+                  <option value="Dec">December</option>
                 </select>
               </div>
             </div>
             <div className="graph_container">
-              <Piechart data={chartData} labels={chartLabels} />
+              {chartData.length !== 0 ? <Piechart data={chartData} labels={chartLabels} /> : <p className={styles.no_records}>No Records</p>}
             </div>
           </div>
           <div className={styles.graph}>
@@ -223,13 +253,22 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>DB125896</td>
-                    <td>Rent</td>
-                    <td>$170k</td>
-                    <td>10 September,2024</td>
-                    <td>Success</td>
-                  </tr>
+
+                  {
+                    transactionData.map((ele, index) => {
+                      const date = new Date(ele.createdAt);
+                      return (
+                        <tr key={index}>
+                          <td>{ele.paymentId}</td>
+                          <td>Rent</td>
+                          <td>₹{ele.amount}</td>
+                          <td>{date.toLocaleString('default', { month: 'long' })},{date.getFullYear()}</td>
+                          <td>Success</td>
+                        </tr>
+                      )
+                    })
+                  }
+
 
                 </tbody>
               </table>

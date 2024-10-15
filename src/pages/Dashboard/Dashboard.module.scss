@@ -50,7 +50,7 @@
       .user_property {
         @include flex(row, flex-start, space-between);
         min-width: 338px;
-        border-right: 1px solid $grey4;
+        background: $grey1;
         border-bottom: 1px solid $grey4;
         border-radius: 8px;
         padding: 15px;
@@ -59,7 +59,6 @@
           .main_title {
             font-size: 16px;
             font-weight: 600;
-            color: $grey4;
           }
 
           .main_title_ans {
@@ -71,7 +70,6 @@
           .main_title_predication {
             font-size: 16px;
             font-weight: 500;
-            color: $grey4;
 
             span {
               color: $active;
@@ -110,8 +108,8 @@
         overflow: auto;
         padding: 15px;
         border-radius: 8px;
+        background: $grey1;
         border-bottom: 1px solid $grey4;
-        border-right: 1px solid $grey4;
 
         .main_listed_title {
           @include flex(row, center, space-between);
@@ -130,6 +128,10 @@
               border: none;
               outline: 0;
               font-size: 15px;
+              
+              &:hover{
+                cursor: pointer;
+              }
             }
           }
         }
@@ -138,6 +140,9 @@
           min-width: 50px;
           min-height: 10px;
           color: #0000ff;
+        }
+        .no_records {
+          text-align: center;
         }
       }
     }
@@ -156,8 +161,8 @@
         overflow: auto;
         padding: 15px;
         border-radius: 8px;
-        border-top: 1px solid $grey4;
-        border-right: 1px solid $grey4;
+        background: $grey1;
+        border-bottom: 1px solid $grey4;
 
         .main_listed_title,
         .main_transaction_title {
@@ -173,6 +178,10 @@
             font-size: 18px;
             font-weight: 500;
             color: $active;
+            
+            &:hover{
+              cursor: pointer;
+            }
           }
         }
 
@@ -191,7 +200,7 @@
             }
 
             tr {
-              text-align: left;
+              text-align: center;
               display: table;
               width: 100%;
               table-layout: fixed;
