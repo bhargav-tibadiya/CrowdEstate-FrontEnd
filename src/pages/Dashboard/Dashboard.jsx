@@ -103,19 +103,19 @@ const Dashboard = () => {
     {
       title: "Total Income",
       title_ans: `₹ ${totalIncome}`,
-      predication_value: (((totalIncome - totalIncome)/totalIncome)*100).toFixed(0),
+      predication_value: (((totalIncome - totalIncome) / totalIncome) * 100).toFixed(0),
       title_icon: <FaDollarSign />
     },
     {
       title: "Total Customer",
       title_ans: userData.length,
-      predication_value: (((userData.length - userData.length)/ userData.length) * 100).toFixed(0),
+      predication_value: (((userData.length - userData.length) / userData.length) * 100).toFixed(0),
       title_icon: <FaUser />
     },
     {
       title: "Recent Transaction",
       title_ans: `₹ ${totalTransaction}`,
-      predication_value: ((totalIncome-totalTransaction)/totalIncome*100).toFixed(0),
+      predication_value: ((totalIncome - totalTransaction) / totalIncome * 100).toFixed(0),
       title_icon: <FaMoneyBillWave />
     },
 
@@ -248,7 +248,6 @@ const Dashboard = () => {
                 <thead>
                   <tr>
                     <th>Transaction ID</th>
-                    <th>Property Type</th>
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Status</th>
@@ -262,7 +261,6 @@ const Dashboard = () => {
                       return (
                         <tr key={index}>
                           <td>{ele.paymentId}</td>
-                          <td>Rent</td>
                           <td>₹{ele.amount}</td>
                           <td>{date.toLocaleString('default', { month: 'long' })},{date.getFullYear()}</td>
                           <td>Success</td>
