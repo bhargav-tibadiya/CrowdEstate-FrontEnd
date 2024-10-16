@@ -44,7 +44,7 @@
 
     .dashboard_main_section {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 50px;
       width: calc(100% - 78px);
       padding: 10px 20px;
@@ -130,8 +130,8 @@
               border: none;
               outline: 0;
               font-size: 15px;
-              
-              &:hover{
+
+              &:hover {
                 cursor: pointer;
               }
             }
@@ -150,14 +150,14 @@
     }
 
     .dashboard_users_listed {
-      @include flex(row, flex-start, flex-start);
+      @include flex(column, flex-start, flex-start);
       width: 100%;
       gap: 50px;
       padding: 10px 20px;
 
       .user_listed,
       .recent_transaction {
-        max-width: calc(50% - 64px);
+        max-width: calc(100% - 64px);
         width: 100%;
         // height: 270px;
         overflow: auto;
@@ -180,8 +180,8 @@
             font-size: 18px;
             font-weight: 500;
             color: $active;
-            
-            &:hover{
+
+            &:hover {
               cursor: pointer;
             }
           }
@@ -199,25 +199,11 @@
               position: sticky;
               top: 0;
               z-index: 1;
-            }
 
-            tr {
-              text-align: center;
-              display: table;
-              width: 100%;
-              table-layout: fixed;
-
-              th {
-                color: $grey4;
-                padding-bottom: 10px;
-              }
-
-              td {
-
-                padding-bottom: 10px;
+              tr {
+                width: calc(100% - 10px);
               }
             }
-
             tbody {
               display: block;
               max-height: 150px;
@@ -238,6 +224,21 @@
                 background-color: $active;
                 border-radius: 10px;
                 border: 3px solid $secondary;
+              }
+            }
+            tr {
+              text-align: left;
+              display: table;
+              width: 100%;
+              table-layout: fixed;
+
+              th {
+                color: $grey4;
+                padding-bottom: 10px;
+              }
+
+              td {
+                padding-bottom: 10px;
               }
             }
 
