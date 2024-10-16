@@ -15,6 +15,8 @@ import Properties from './pages/Properties/Properties'
 
 import Market from './pages/Market/Market'
 import Property from './pages/Property/Property'
+import Dashboard from './pages/Dashboard/Dashboard'
+import UserProfile from './pages/UserProfile/UserProfile'
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
             <Route path={routes.contact} element={<Home />} />
 
             {/* Sidebar Menu Paths */}
+            <Route path={routes.dashboard} element={<Dashboard />} />
+            <Route path={routes.profile} element={<UserProfile />} />
             <Route path={routes.addproperty} element={<AddProperty />} />
             <Route path={routes.properties} element={<Properties />} />
             <Route path={routes.property + '/:id'} element={<Property />} />

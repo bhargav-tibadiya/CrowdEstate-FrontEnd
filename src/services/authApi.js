@@ -85,3 +85,20 @@ export const findUser = async (payload) => {
 
   }
 }
+
+export const getAllUser = async () => {
+  try {
+
+    const response = await axios.post(`${API_URL}/auth/getalluser`, {
+      withCredentials: true
+    });
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Login\n Check authAPi #FE017', error);
+    console.log('Reason :', error?.response?.data?.message)
+    return error.response.data
+
+  }
+}

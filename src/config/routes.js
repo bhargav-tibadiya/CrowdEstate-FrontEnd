@@ -10,6 +10,8 @@ export const routes = {
   login: '/login',
   signup: '/signup',
 
+  dashboard: '/dashboard',
+
   addproperty: '/addproperty',
   properties: '/properties',
 

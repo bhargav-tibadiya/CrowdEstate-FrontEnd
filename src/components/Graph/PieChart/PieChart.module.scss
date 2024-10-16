@@ -1,0 +1,36 @@
+@import "../../../style/constant";
+
+.container {
+  @include flex(row, center, space-between);
+
+  canvas {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .all_labels_data {
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+
+    .labels {
+      @include flex(row, flex-start, flex-start);
+      gap: 15px;
+      .color{
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+      }
+      .labels_parts {
+        .que {
+          font-size: 18px;
+          font-weight: 500;
+          padding-bottom: 10px;
+        }
+        .ans {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

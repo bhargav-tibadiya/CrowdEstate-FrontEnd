@@ -35,3 +35,21 @@ export const addTransaction = async (payload) => {
 
   }
 };
+
+export const fetchAllTransaction = async (payload) => {
+  try {
+    
+    const response = await axios.post(`${API_URL}/purchase/alltransaction`, payload, {
+      withCredentials: true,
+    });
+
+    return response.data;
+
+  } catch (error) {
+
+    console.log('Error While Adding Transaction \n Check PurchaseAPI #FE016', error);
+    console.log('Reason:', error?.response?.data?.message);
+    throw error.response?.data || error;
+
+  }
+};
