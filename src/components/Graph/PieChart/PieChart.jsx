@@ -5,6 +5,7 @@ import styles from "./PieChart.module.scss"
 const Piechart = ({ data, labels }) => {
     const ChartRef = useRef(null);
     const ChartInstance = useRef(null);
+    const backgroundColor = ['#E85602', '#A9DD24', "#0000ff","#FFD60A","#AFB2BF"]
 
     useEffect(() => {
         if (ChartInstance.current) {
@@ -22,12 +23,7 @@ const Piechart = ({ data, labels }) => {
                         label: "Crowd Estate",
                         data: data,
                         borderWidth: 1,
-                        backgroundColor: [
-                            '#E85602',
-                            '#A9DD24',
-                            "#0000ff"
-
-                        ],
+                        backgroundColor: backgroundColor,
                     }
                 ],
 
@@ -61,29 +57,20 @@ const Piechart = ({ data, labels }) => {
         <div className={styles.container}>
             <canvas ref={ChartRef} />
             <div className={styles.all_labels_data}>
-
-                <div className={styles.labels}>
-                    <div className={styles.color}></div>
-                    <div className={styles.labels_parts}>
-                        <div className={styles.que}>{labels[0]}</div>
-                        <div className={styles.ans}>{data[0]}</div>
-                    </div>
-                </div>
-                <div className={styles.labels}>
-                    <div className={styles.color1}></div>
-                    <div className={styles.labels_parts}>
-                        <div className={styles.que}>{labels[1]}</div>
-                        <div className={styles.ans}>{data[1]}</div>
-                    </div>
-                </div>
-                <div className={styles.labels}>
-                    <div className={styles.color2}></div>
-                    <div className={styles.labels_parts}>
-                        <div className={styles.que}>{labels[2]}</div>
-                        <div className={styles.ans}>{data[2]}</div>
-                    </div>
-                </div>
-            </div>
+                {
+                    labels.map((ele, index) => {
+                        return (
+                            <div className={styles.labels} key={index}>
+                                <div className={styles.color} style={{background:backgroundColor[index]}}></div>
+                                <div className={styles.labels_parts}>
+                                    <div className={styles.que}>{ele}</div>
+                                    <div className={styles.ans}>{data[index]}</div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+        </div>
         </div>
     )
 }
