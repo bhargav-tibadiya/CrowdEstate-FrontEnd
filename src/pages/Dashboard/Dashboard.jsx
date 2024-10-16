@@ -61,25 +61,31 @@ const Dashboard = () => {
     const date = new Date(dateString);
     const monthNames = date.toLocaleString('default', { month: 'short' });;
     return monthNames;
-};
+  };
 
 
-// Filter data based on selected month
-const filteredData = selectedMonth === 'All' 
-    ? propertyData 
+  // Filter data based on selected month
+  const filteredData = selectedMonth === 'All'
+    ? propertyData
     : propertyData.filter(item => getMonthName(item.listedAt) === selectedMonth);
 
-// Count properties by category for the selected month
-const categoryCounts = filteredData.reduce((acc, property) => {
-  acc[property.category] = (acc[property.category] || 0) + 1;
-  return acc;
-}, {});
+  //all category
+  const allcategory = [...new Set(propertyData.map((ele) => ele.category))]
 
+  // Count properties by category for the selected month
+  const categoryCounts = filteredData.reduce((ele, property) => {
+    allcategory.forEach(category => {
+      if (!ele[category]) {
+        ele[category] = 0;
+      }
+    })
+    ele[property.category] = (ele[property.category] || 0) + 1;
+    return ele;
+  }, {});
 
-const chartData = Object.values(categoryCounts);
-const chartLabels = Object.keys(categoryCounts);
+  const chartData = Object.values(categoryCounts);
+  const chartLabels = Object.keys(categoryCounts);
 
-console.log(chartData)
   //totalIncome calculate
   const totalIncome = propertyData.reduce((acc, curr) => acc + curr.price, 0);
 
@@ -151,12 +157,12 @@ console.log(chartData)
             <div className={styles.main_listed_title}>
               <div className={styles.que}>Category Analytics</div>
               <div className={styles.ans}>
-                <select 
-                name="date" 
-                id="date"
-                value={selectedMonth}
-                onChange={(e)=>setSelectedMonth(e.target.value)}
-                > 
+                <select
+                  name="date"
+                  id="date"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                >
                   <option value="All">All</option>
                   <option value="Jan">January</option>
                   <option value="Feb">February</option>
