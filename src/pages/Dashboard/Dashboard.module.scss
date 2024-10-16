@@ -43,13 +43,15 @@
     }
 
     .dashboard_main_section {
-      @include flex(row, flex-start, flex-start);
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
       gap: 50px;
+      width: calc(100% - 78px);
       padding: 10px 20px;
 
       .user_property {
         @include flex(row, flex-start, space-between);
-        min-width: 338px;
+        width: 100%;
         background: $grey1;
         border-bottom: 1px solid $grey4;
         border-radius: 8px;
@@ -104,7 +106,7 @@
       .graph {
         max-width: calc(50% - 64px);
         width: 100%;
-        height: 285px;
+        min-height: 285px;
         overflow: auto;
         padding: 15px;
         border-radius: 8px;
@@ -211,6 +213,7 @@
               }
 
               td {
+
                 padding-bottom: 10px;
               }
             }
