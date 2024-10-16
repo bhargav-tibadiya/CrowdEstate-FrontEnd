@@ -97,29 +97,25 @@ const Dashboard = () => {
     {
       title: "Total Property",
       title_ans: propertyData.length,
-      predication_status: "up",
-      predication_value: (12 / 15) * 100,
+      predication_value: ((propertyData.length / 15) * 100).toFixed(0),
       title_icon: <FaCity />
     },
     {
       title: "Total Income",
       title_ans: `₹ ${totalIncome}`,
-      predication_status: "up",
-      predication_value: 45,
+      predication_value: (((totalIncome - totalIncome)/totalIncome)*100).toFixed(0),
       title_icon: <FaDollarSign />
     },
     {
-      title: "Total User",
+      title: "Total Customer",
       title_ans: userData.length,
-      predication_status: "down",
-      predication_value: (userData.length / 10) * 100,
+      predication_value: (((userData.length - userData.length)/ userData.length) * 100).toFixed(0),
       title_icon: <FaUser />
     },
     {
       title: "Recent Transaction",
       title_ans: `₹ ${totalTransaction}`,
-      predication_status: "down",
-      predication_value: 25,
+      predication_value: ((totalIncome-totalTransaction)/totalIncome*100).toFixed(0),
       title_icon: <FaMoneyBillWave />
     },
 
@@ -141,7 +137,7 @@ const Dashboard = () => {
                       {value.title}
                     </div>
                     <div className={styles.main_title_ans}>{value.title_ans}</div>
-                    <div className={styles.main_title_predication}><span className={value.predication_status !== "up" ? (styles.negative) : ""}>{value.predication_status !== "up" ? <FaArrowDown /> : <FaArrowUp />} {value.predication_value}%</span> Vs last month</div>
+                    <div className={styles.main_title_predication}><span className={value.predication_value > 0 ? (styles.negative) : ""}>{value.predication_value > 0 ? <FaArrowDown /> : <FaArrowUp />} {Math.abs(value.predication_value)}%</span> Vs last month</div>
                   </div>
                   <div className={styles.add_icon}>
                     <div className={styles.icon}>{value.title_icon}</div>
