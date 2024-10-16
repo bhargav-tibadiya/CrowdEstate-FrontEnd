@@ -16,21 +16,10 @@
     .labels {
       @include flex(row, flex-start, flex-start);
       gap: 15px;
-      .color,
-      .color1,
-      .color2{
+      .color{
         height: 15px;
         width: 15px;
         border-radius: 50%;
-      }
-      .color{
-        background: #E85602;
-      }
-      .color1{
-        background: #A9DD24;
-      }
-      .color2{
-        background: #0000ff;
       }
       .labels_parts {
         .que {
