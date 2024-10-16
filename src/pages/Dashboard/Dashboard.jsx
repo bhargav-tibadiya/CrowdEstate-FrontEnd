@@ -204,7 +204,6 @@ const Dashboard = () => {
           <div className={styles.user_listed}>
             <div className={styles.main_listed_title}>
               <div className={styles.que}>My Listed Property</div>
-              <div className={styles.ans}>See all</div>
             </div>
             <div className={styles.listed_details}>
               <table>
@@ -241,7 +240,7 @@ const Dashboard = () => {
           <div className={styles.recent_transaction}>
             <div className={styles.main_transaction_title}>
               <div className={styles.que}>My Recent Transaction</div>
-              <div className={styles.ans}>See all</div>
+
             </div>
             <div className={styles.listed_trasaction_details}>
               <table>
@@ -250,6 +249,7 @@ const Dashboard = () => {
                     <th>Transaction ID</th>
                     <th>Amount</th>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -258,11 +258,19 @@ const Dashboard = () => {
                   {
                     transactionData.map((ele, index) => {
                       const date = new Date(ele.createdAt);
+                      const day = String(date.getDate()).padStart(2, '0');
+                      const month = String(date.getMonth() + 1).padStart(2, '0');
+                      const year = date.getFullYear();
+
+                      const hours = String(date.getHours()).padStart(2, '0');
+                      const minutes = String(date.getMinutes()).padStart(2, '0');
+                      const seconds = String(date.getSeconds()).padStart(2, '0');
                       return (
                         <tr key={index}>
                           <td>{ele.paymentId}</td>
                           <td>₹{ele.amount}</td>
-                          <td>{date.toLocaleString('default', { month: 'long' })},{date.getFullYear()}</td>
+                          <td>{day}/{month}/{year}</td>
+                          <td>{hours}:{minutes}:{seconds}</td>
                           <td>Success</td>
                         </tr>
                       )
